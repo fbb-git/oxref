@@ -1,0 +1,12 @@
+#include "objdump.h"
+
+#include <algorithm>
+
+#include <bobcat/arg>
+#include <bobcat/fnwrap>
+#include <bobcat/process>
+
+using namespace std;
+using namespace FBB;
+
+

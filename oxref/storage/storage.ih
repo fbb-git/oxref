@@ -1,0 +1,70 @@
+#include "storage.h"
+
+#include <iostream>
+
+#include <bobcat/pattern>
+
+using namespace std;
+using namespace FBB;
+
+//                        "/bin/grep -E -v '"
+//                "[[:space:]]_"
+//                "|"
+//                "archive"
+//                "|"
+//                "[[:space:]]\\.data"
+//                "|"
+//                "[[:space:]]\\.bss"
+//                "|"
+//                "[[:space:]]std::"
+//                "|"
+//                "[[:space:]]w[[:space:]]"
+//                "|"
+//                "__"
+//                "|"
+//                "[[:space:]]d[[:space:]]"
+//                "|"
+//                "SYMBOL[[:space:]]TABLE:"
+//                "|"
+//                "typeinfo[[:space:]]for"
+//                "|"
+//                "[[:space:]]l[[:space:]]+F[[:space:]]\\.text"
+//            "'");
+//
+
+
+//    Pattern pattern(
+////                " .data"
+////                "|"
+//                "^\\s*$"
+//                "|"
+//                "^In archive"
+//                "|"
+//                " .bss"
+//                "|"
+//                " std::"
+//                "|"
+//                "__"
+//                "|"
+//                " _"
+//                "|"
+//                " d "
+//                "|"
+//                " w "
+//                "|"
+//                " l\\s+F\\s\\.text"
+//                "|"
+//                "SYMBOL TABLE:"
+//                "|"
+//                "operator delete\\(void\\*\\)"
+//                "|"
+//                "typeinfo for ", 
+//                false);                 // case sensitive OFF
+//
+//    
+//    
+//    {
+//        if (not(pattern << line))
+//            cout << line << endl;
+//    }
+

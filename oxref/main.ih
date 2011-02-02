@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+namespace Icmbuild
+{
+    extern char version[];
+    extern char years[];
+    extern char author[];
+};
+
+
+#include <algorithm>
+#include <iterator>
+
+#include <bobcat/arg>
+
+#include "storage/storage.h"
+#include "objdump/objdump.h"
+
+void usage(std::string const &progname);
+
+using namespace std;
+using namespace FBB;
+using namespace Icmbuild;
+

@@ -1,0 +1,12 @@
+#include "store.h"
+
+#include <algorithm>
+#include <iostream>
+#include <cstring>
+
+#include <bobcat/arg>
+#include <bobcat/fnwrap>
+
+using namespace std;
+using namespace FBB;
+
