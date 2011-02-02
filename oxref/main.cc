@@ -17,6 +17,14 @@ namespace   // the anonymous namespace can be used here
                     sizeof(longOptions) / sizeof(Arg::LongOption);
 }
 
+//    Pattern Storage::s_reject("^.*\\*UND\\*\\s+\\d+\\s+_"
+//        "|"
+//        "vtable for"
+//        "|"
+//        "typeinfo for"
+//        "|"
+//        "virtual thunk to");
+
 int main(int argc, char **argv)
 try
 {
@@ -26,6 +34,7 @@ try
     ObjDump odump;
     Storage storage;
 
+
     odump.start();          // generate objdump's output
 
                             // insert into Storage
@@ -33,10 +42,16 @@ try
 
                             // display the results
     cout << storage << '\n';
+}
+catch (Errno const &e)
+{
+    cout << e.why() << "\n";
 
+    return 1;
 }
 catch (...)
 {
+    cout << "Caught unaccounted for exception\n";
     return 1;
 }
 

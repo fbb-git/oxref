@@ -2,6 +2,8 @@
 
 std::ostream &Store::insertInto(std::ostream &out) const
 {
+    cerr << "insert store: insertinto\n";
+
     Arg &arg = Arg::instance();
 
     if (arg.option(0, 's'))

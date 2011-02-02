@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-#include <bobcat/pattern>
-
 using namespace std;
 using namespace FBB;
 

@@ -13,7 +13,7 @@
 #define BINARY              "binary"
     // Uncomment to relink the binary, even when no sources were
     // changed (this is useful if, e.g., a library was rebuilt)
-//#define REFRESH
+#define REFRESH
 
     // Uncomment to install the binary in the provided path using 
     // `icmbuild install'

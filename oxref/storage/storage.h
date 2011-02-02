@@ -12,6 +12,7 @@ class Storage
 {
     friend std::ostream &operator<<(std::ostream &out, 
                                     Storage const &storage);
+
     static FBB::Pattern s_reject;
     static FBB::Pattern s_objFile;
     static FBB::Pattern s_abs;
@@ -34,6 +35,7 @@ class Storage
         void sourceFile(std::string const &fname);
         void undefined(std::string const &symbol);
         void object(std::string const &symbol);
+
 };
 
 inline std::ostream &operator<<(std::ostream &out, Storage const &storage)

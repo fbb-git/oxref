@@ -1,14 +1,15 @@
 #include "storage.ih"
 
-Pattern Storage::s_reject(
-        "^.*\\*UND\\*\\s+\\d+\\s+_"
-        "|"
-        "vtable for"
-        "|"
-        "typeinfo for"
-        "|"
-        "virtual thunk to"
-    );
+Pattern Storage::s_reject
+(
+    "^.*\\*UND\\*\\s+\\d+\\s+_"
+    "|"
+    "vtable for"
+    "|"
+    "typeinfo for"
+    "|"
+    "virtual thunk to"
+);
 
 Pattern Storage::s_objFile("^(.*):\\s+file format");
 Pattern Storage::s_abs("^.*\\*ABS\\*\\s+[[:alnum:]]+\\s(.*)");
