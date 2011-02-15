@@ -12,8 +12,6 @@ void XrefData::ctor()
 
     if (d_nameIndex == string::npos)        // not found: search fm the end
         d_nameIndex = d_refName.length();
-    else 
-        reduceSymbol();                     // maybe reduce the symbol's len
 
     d_nameIndex = d_refName.rfind(':', d_nameIndex);   // find SRO
     d_nameIndex = 

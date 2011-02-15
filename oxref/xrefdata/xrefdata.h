@@ -41,7 +41,7 @@ class XrefData
         void calledFrom(size_t currentIdx);
 
         void defined(std::ostream &out) const;
-        std::string const &symbol() const;      // returns d_refName
+        std::string symbol() const;      // returns d_refName
         char const *name() const;
         std::string const &sourceFile() const;
 
@@ -49,18 +49,17 @@ class XrefData
 
     private:
         void ctor();
-        void reduceSymbol();
+        std::string reduceSymbol(std::string const &symbol) const;
+        void keepFirst() const;
+        void reduceLen(size_t len) const;
+        void reduceToCount(std::string &symbol) const;
+        size_t skipTemplate(size_t begin) const;  // index of 1st <
 
 };
 
 inline std::vector<size_t> const &XrefData::usedBy() const
 {
     return d_calledFrom;
-}
-
-inline  std::string const &XrefData::symbol() const
-{
-    return d_refName;
 }
 
 inline  char const *XrefData::name() const

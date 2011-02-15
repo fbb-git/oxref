@@ -5,6 +5,7 @@ namespace   // the anonymous namespace can be used here
 {
     Arg::LongOption longOptions[] =
     {
+        {"arg", 'a'},
         {"help", 'h'},
         {"objdump", Arg::Required},
         {"object-files", 'o'},
@@ -33,7 +34,7 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    Arg &arg = Arg::initialize("fhosvx", longOptions, longEnd, argc, argv);
+    Arg &arg = Arg::initialize("a:fhosvx", longOptions, longEnd, argc, argv);
     arg.versionHelp(usage, version, 1);
 
     ObjDump odump;
