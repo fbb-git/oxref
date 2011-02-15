@@ -1,6 +1,8 @@
 #include "xrefdata.h"
 
 #include <iostream>
+#include <bobcat/arg>
 
 using namespace std;
+using namespace FBB;
 

@@ -7,6 +7,11 @@
 
 #include "../xrefdata/xrefdata.h"
 
+namespace FBB
+{
+    class Pattern;
+}
+
 class Store
 {
     friend std::ostream &operator<<(std::ostream &out, Store const &store);
@@ -21,6 +26,7 @@ class Store
     XrefVector d_xrefData;
     mutable std::vector<size_t> d_defIdx;       // indices of defined 
                                                 // functions/objects
+
     public:
         Store();
 
@@ -34,6 +40,8 @@ class Store
     private:
         void define(std::string const &symbol, bool isFunction);
         std::ostream &insertInto(std::ostream &out) const;
+        void insert(std::ostream &out, std::string const &name, 
+                                                        bool doSelect) const;
 
         static void insertDefined(size_t idx, std::ostream &out, 
                                   XrefVector const &xref);
@@ -42,6 +50,10 @@ class Store
 
         static bool name(size_t left, size_t right, 
                                             XrefVector const &xrefVector);
+        static bool findSymbolPattern(size_t idx, FBB::Pattern &namePattern, 
+                                                XrefVector const &xrefVector);
+        static bool findName(size_t idx, std::string const &name, 
+                                                XrefVector const &xrefVector);
 };
 
 inline std::ostream &operator<<(std::ostream &out, Store const &store)

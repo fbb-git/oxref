@@ -8,5 +8,5 @@ XrefData::XrefData(string const &sourceFile, string const &objFile,
     d_isFunction(isFunction),
     d_refName(symbol)
 {
-    setNameIndex();
+    ctor();
 }

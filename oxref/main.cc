@@ -7,10 +7,15 @@ namespace   // the anonymous namespace can be used here
     {
         {"help", 'h'},
         {"objdump", Arg::Required},
-        {"objectfiles", 'o'},
-        {"sort-by", 's'},       // may be multiply used
+        {"object-files", 'o'},
+        {"source-files", 's'},
+        {"full-symbol", 'f'},
+        {"select-pattern",  Arg::Required},
+        {"select",          Arg::Required},
+        {"xref-source-files", 'x'},
         {"version", 'v'},
     };
+//        {"sort-by", 's'},       // may be multiply used
 
     Arg::LongOption const *const longEnd =
                     longOptions +
@@ -28,7 +33,7 @@ namespace   // the anonymous namespace can be used here
 int main(int argc, char **argv)
 try
 {
-    Arg &arg = Arg::initialize("hos:v", longOptions, longEnd, argc, argv);
+    Arg &arg = Arg::initialize("fhosvx", longOptions, longEnd, argc, argv);
     arg.versionHelp(usage, version, 1);
 
     ObjDump odump;

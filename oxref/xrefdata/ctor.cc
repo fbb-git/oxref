@@ -1,11 +1,19 @@
 #include "xrefdata.ih"
 
-void XrefData::setNameIndex()
+void XrefData::ctor()
 {
+    Arg &arg = Arg::instance();
+
+    d_source = arg.option('s');
+    d_object = arg.option('o');
+    d_fullSymbol = arg.option('f');
+
     d_nameIndex = d_refName.find('(');  // find 1st opening '('
 
     if (d_nameIndex == string::npos)        // not found: search fm the end
         d_nameIndex = d_refName.length();
+    else 
+        reduceSymbol();                     // maybe reduce the symbol's len
 
     d_nameIndex = d_refName.rfind(':', d_nameIndex);   // find SRO
     d_nameIndex = 

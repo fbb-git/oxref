@@ -13,11 +13,15 @@ class XrefData
     bool d_isFunction;                  // true: function, false: object
 
     std::string d_refName;              // full name of object or function
-public:
+
     size_t d_nameIndex;                 // index where the proper name (after
                                         // its class/namespace) starts
 
     std::vector<size_t> d_calledFrom;
+
+    bool d_source;
+    bool d_object;
+    bool d_fullSymbol;
 
     public:
         XrefData();
@@ -37,14 +41,14 @@ public:
         void calledFrom(size_t currentIdx);
 
         void defined(std::ostream &out) const;
-        std::string const &symbol() const;
+        std::string const &symbol() const;      // returns d_refName
         char const *name() const;
         std::string const &sourceFile() const;
 
         std::vector<size_t> const &usedBy() const;
 
     private:
-        void setNameIndex();
+        void ctor();
 };
 
 inline std::vector<size_t> const &XrefData::usedBy() const
