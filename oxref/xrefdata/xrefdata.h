@@ -49,6 +49,8 @@ class XrefData
 
     private:
         void ctor();
+        void reduceSymbol();
+
 };
 
 inline std::vector<size_t> const &XrefData::usedBy() const
