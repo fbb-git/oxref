@@ -1,6 +1,14 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <iterator>
+#include <iomanip>
+
+#include <bobcat/arg>
+#include <bobcat/datetime>
+
+#include "storage/storage.h"
+#include "objdump/objdump.h"
 
 namespace Icmbuild
 {
@@ -8,18 +16,6 @@ namespace Icmbuild
     extern char years[];
     extern char author[];
 };
-
-
-#include <algorithm>
-#include <iterator>
-
-//#include <bobcat/arg>
-#include <bobcat/arg>
-
-
-
-#include "storage/storage.h"
-#include "objdump/objdump.h"
 
 void usage(std::string const &progname);
 

@@ -1,0 +1,83 @@
+NOUSERMACRO(oxref)
+
+includefile(../../release.yo)
+
+htmlbodyopt(text)(#27408B)
+htmlbodyopt(bgcolor)(#FFFAF0)
+whenhtml(mailto(Frank B. Brokken: f.b.brokken@rug.nl))
+
+DEFINEMACRO(lsoption)(3)(\
+    bf(--ARG1)=tt(ARG3) (bf(-ARG2))\
+)
+DEFINEMACRO(laoption)(2)(\
+    bf(--ARG1)=tt(ARG2)\
+)
+DEFINEMACRO(loption)(1)(\
+    bf(--ARG1)\
+)
+DEFINEMACRO(soption)(1)(\
+    bf(-ARG1)\
+)
+
+
+DELETEMACRO(tt)
+DEFINEMACRO(tt)(1)(em(ARG1))
+
+COMMENT( man-request, section, date, distribution file, general name)
+manpage(oxref)(1)(_CurYrs_)(oxref._CurVers_.tar.gz)
+        (oxref - fast directory changes)
+
+COMMENT( man-request, larger title )
+manpagename(oxref)(eXtra fast Directory changer)
+
+COMMENT( all other: add after () )
+manpagesynopsis()
+       bf(oxref) [OPTIONS] tt(arguments)
+
+manpagedescription()
+
+    The program bf(oxref)     
+
+manpagesection(RETURN VALUE)
+
+    bf(Oxref) returns 0 to the operating system unless an error occurs or
+bf(oxref)'s version or usage info is shown or requested. In those cases 1 is
+returned 
+
+manpageoptions()
+
+    If available, single letter options are listed between parentheses
+following their associated long-option variants. Single letter options require
+arguments if their associated long options require arguments as well.
+    itemization(
+    it() loption(add-root) tt(condition)nl()
+
+    it() loption(all) soption(a)nl()
+
+    it() lsoption(config-file)(c)(filename)nl()
+
+    it() loption(help) (soption(h))nl()
+           Basic usage information is written to the standard error stream.
+
+    it() loption(version) (soption(v))nl()
+           bf(Oxref)'s version number is written to the standard error stream.
+    )    
+    
+
+
+manpagesection(EXAMPLES)
+
+    verb(
+    )
+
+manpagebugs()
+
+    This is the initial release version of tt(oxref). 
+
+manpagesection(ABOUT oxref)
+
+    The program bf(oxref) 
+
+manpageauthor()
+
+Frank B. Brokken (f.b.brokken@rug.nl).

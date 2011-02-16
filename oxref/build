@@ -1,0 +1,92 @@
+#!/usr/bin/icmake -qt/tmp/oxref
+
+#include "INSTALL.im"
+
+#include "icmake/run"
+#include "icmake/md"
+#include "icmake/getenv"
+#include "icmake/special"
+#include "icmake/clean"
+#include "icmake/manpage"
+#include "icmake/library"
+#include "icmake/program"
+#include "icmake/install"
+#include "icmake/xref"
+
+void main(int argc, list argv, list envp)
+{
+    string option;
+    string strip;
+
+    g_env = envp;
+
+    setLocations();     // from INSTALL.im
+
+    my_getenv("DRYRUN");
+    g_dryrun = g_envvar;
+
+    option = element(1, argv);
+    if (element(2, argv) == "strip")
+        strip = "-s";
+
+    if (option == "clean")
+        clean(0);
+
+    if (option == "distclean")
+        clean(1);
+
+    if (option == "install")
+        install(element(2, argv), 1);
+
+    if (option == "installprog")
+        install(element(2, argv), 0);
+
+    if (option == "man")
+        manpage();
+
+    if (option == "sourceforge")
+    {
+        special();
+        exit(0);
+    }
+
+    if (option == "library")
+        library(1);
+
+    if (option == "program")
+    {
+        program(strip);
+        exit(0);
+    }
+
+    if (option == "xref")
+    {
+        xref(strip);
+        exit(0);
+    }
+        
+
+    printf("Usage: build [-p] what\n"
+        "Where `what' is one of:\n"
+        "   clean              - clean up remnants of previous compilations\n"
+        "   distclean          - clean + fully remove tmp/\n"
+        "   library            - build oxref's library\n"
+        "   man                - build the man-page (requires Yodl)\n"
+        "   program [strip]    - build oxref (optionally strip the\n"
+        "                        executable)\n"
+        "   install <base>     - install the software in the locations "
+                                                            "defined\n"
+        "                        in the INSTALL.im file, optionally "
+                                                            "below <base>\n"
+        "   installprog <base> - only install the program\n"
+        "   sourceforge        - create a new release.yo for sourceforge\n"
+        "   xref [strip]       - create oxref's cross-reference file\n"
+        "                        (when needed create an optionally stripped\n"
+        "                         executable first)\n"
+        "\n"
+        "If the environment variable DRYRUN is defined, no commands are\n"
+        "actually executed\n"
+        "\n"
+    );
+    exit(1);
+}

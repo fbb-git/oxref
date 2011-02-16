@@ -1,7 +1,6 @@
 #include "main.ih"
 
-
-namespace   // the anonymous namespace can be used here
+namespace
 {
     Arg::LongOption longOptions[] =
     {
@@ -38,7 +37,20 @@ try
     copy(odump.begin(), odump.end(), back_inserter(storage));
 
                             // display the results
-    cout << storage << '\n';
+    cout << 
+        arg.basename() << " by " << Icmbuild::author << '\n' <<
+        arg.basename() << " V" << Icmbuild::version << ' ' << 
+                                                    Icmbuild::years << "\n"
+        "\n"
+        "CREATED " << DateTime().rfc2822() << "\n"
+        "CROSS REFERENCE FOR: ";
+
+    copy(argv + 1, argv + argc, ostream_iterator<char const *>(cout, " "));
+
+    cout << '\n' <<
+        setfill('-') << setw(70) << '-' << setfill(' ') << "\n"
+        "\n" <<
+        storage << '\n';
 }
 catch (Errno const &e)
 {

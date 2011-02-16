@@ -1,0 +1,31 @@
+void install(string where, int all)
+{
+    printf("  installing the executable\n");
+    md(where + BIN);
+    run("cp tmp/bin/* " + where + BIN);
+
+    if (all)
+    {
+        printf("  installing the manual page oxref.1\n");
+        md(where + MAN);
+        run("gzip -9 < tmp/man/oxref.1 > " + 
+                                        where + MAN + "/oxref.1.gz");
+
+        printf("  installing the manual page oxrefman.html\n");
+        md(where + DOC + "/man");
+        run("cp tmp/manhtml/oxrefman.html " + where + DOC + "/man");
+    
+        printf("  installing information directly in and under $DOC\n");
+        run("gzip -9 < changelog > " + where + DOC + "/changelog.gz");
+        run("gzip -9 < tmp/doc/oxref.xref > " + 
+                                            where + DOC + "/oxref.xref.gz");
+    }
+
+    printf("  Installation completed\n");
+
+    exit(0);
+}
+
+
+
+

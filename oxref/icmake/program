@@ -1,0 +1,18 @@
+
+void program(string strip)
+{
+    string lopt;
+
+    #ifdef PROFILE
+        lopt = PROFILE;
+    #else
+        lopt = strip;
+    #endif
+
+    library(0);
+
+    exec(COMPILER, "-o", g_binary,
+            "-loxref", libs, "-L.", libpath , lopt);
+
+//    system(g_binary + " -foxs tmp/liboxref.a > " 
+}
