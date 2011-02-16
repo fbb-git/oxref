@@ -25,18 +25,43 @@ DEFINEMACRO(tt)(1)(em(ARG1))
 
 COMMENT( man-request, section, date, distribution file, general name)
 manpage(oxref)(1)(_CurYrs_)(oxref._CurVers_.tar.gz)
-        (oxref - fast directory changes)
+        (oxref - cross reference utility)
 
 COMMENT( man-request, larger title )
-manpagename(oxref)(eXtra fast Directory changer)
+manpagename(oxref)(cross reference utility for multiple languages)
 
 COMMENT( all other: add after () )
 manpagesynopsis()
-       bf(oxref) [OPTIONS] tt(arguments)
+       bf(oxref) [OPTIONS] tt(arguments) nl()
+        [OPTIONS] - see the bf(OPTIONS) section below nl()
+        arguments - object files and/or libraries to process nl()
+
+    The cross reference listing is written to the standard output stram.
 
 manpagedescription()
 
-    The program bf(oxref)     
+    The program bf(oxref) generates a cross reference listing of symbols
+defined in non-stripped object files and/or libraries. 
+
+    A cross reference listing shows the functions using certain symbols
+(functions, data). This is useful information during program development and
+debugging phases. E.g., assuming that the signature; the pre-conditions or the
+post-conditions of a function must be changed it is important to know from what
+function(s) the function-to-modify is called to verify that the changes to the
+modified function do not break its calling functions.
+
+The generated cross reference listing starts with a header showing information
+about the program, a time stamp and the arguments passed to tt(oxref). E.g.,
+
+verb(
+oxref by Frank B. Brokken (f.b.brokken@rug.nl)
+oxref V0.90.00 2011
+
+CREATED Wed, 16 Feb 2011 15:21:03 +0000
+CROSS REFERENCE FOR: --select define liboxref.a 
+----------------------------------------------------------------------
+)
+
 
 manpagesection(RETURN VALUE)
 
@@ -50,33 +75,171 @@ manpageoptions()
 following their associated long-option variants. Single letter options require
 arguments if their associated long options require arguments as well.
     itemization(
-    it() loption(add-root) tt(condition)nl()
+    it() lsoption(arg)(a)(mode)nl()
+        Mode specifies the way the output is abbreviated:nl()
 
-    it() loption(all) soption(a)nl()
+        bf(count) - function parameters are suppressed; instead the number of
+arguments required by a function is shown in its parameter list. Example:
+        verb(
+usage(1)
+        )
+    instead of
+        verb(
+usage(std::string const&)
+        )
 
-    it() lsoption(config-file)(c)(filename)nl()
+    bf(first) - only show the first word of parameters. Example:
+        verb(
+insertDefined(unsigned, std::ostream&, std::vector&)
+        )
+    instead of
+        verb(
+insertDefined(unsigned int, std::ostream&, std::vector<XrefData, 
+              std::allocator<XrefData> > const&)
+        )
+
+        bf(<len>) - where tt(<len>) is a positive integral number (5 is used
+if tt(<len>) is less than 5). tt(<len>) specifies the maximum length of
+parameter names. If parameter names need to be truncated, an ellipsis replaces
+the truncated characters. 
+Example using tt(-a 12):
+        verb(
+insertDefined(unsigned int, std::ostream&, std::vect...&)
+        )
+    instead of
+        verb(
+insertDefined(unsigned int, std::ostream&, std::vector<XrefData, 
+              std::allocator<XrefData> > const&)
+        )
+
+    it() loption(full-symbol) soption(f)nl()
+        The full names of the symbols are shown, in addition to the plain
+symbol names. Full names include class names and/or namespace
+identifiers. Example: 
+        verb(
+insertDefined(unsigned int, std::ostream&, std::vector<XrefData,
+              std::allocator<XrefData> > const&) 
+  Full name: Store::insertDefined(unsigned int, std::ostream&,
+          std::vector<XrefData, std::allocator<XrefData> > const&) 
+        )
 
     it() loption(help) (soption(h))nl()
            Basic usage information is written to the standard error stream.
 
+    it() loption(object-files) (soption(o))nl()
+            Include the name of object files containing the symbols in the
+        cross reference listing
+
+    it() laoption(select)(name)nl()
+            Only display the cross-reference of tt(name), where tt(name) 
+        is the (case sensitive) initial substring of a symbol
+
+    it() laoption(select-pattern)(regex)nl()
+            Only display the cross-reference of symbols matching the regular
+        expression tt(regex), where tt(regex) is a regular expression matching
+        the bf(regex)(7) specification, including the extensions offered by 
+        the bf(pattern)(3bobcat) bf(Pattern) class. Case sensitive matching is
+        used here, too.
+
+    it() loption(source-files) (soption(s))nl()
+            Include the name of source files containing the symbols in the
+        cross reference listing
+
+    it() loption(xref-source-files) (soption(x))nl()
+            Include the name of source files containing the used symbols in
+        the cross reference listing
+
     it() loption(version) (soption(v))nl()
-           bf(Oxref)'s version number is written to the standard error stream.
+           tt(Oxref)'s version number is written to the standard error stream.
     )    
     
 
 
 manpagesection(EXAMPLES)
 
+    The examples show how tt(oxref) was called, followed by a representative
+example of a cross-reference listing for a symbol. tt(Oxref)'s own cross
+reference listing was used:
     verb(
+called as: oxref liboxref
+
+define(std::string const&, bool)
+  Used By:
+    Store::setFunction(std::string const&)
+    Store::setObject(std::string const&)
+    Store::setSource(std::string const&)
+
+--------------------
+
+called as: oxref -foxs liboxref
+
+define(std::string const&, bool)
+  Full name: Store::define(std::string const&, bool)
+  Source:    define.cc (1define.o)
+  Used By:
+    setfunction.cc: Store::setFunction(std::string const&)
+    setobject.cc: Store::setObject(std::string const&)
+    setsource.cc: Store::setSource(std::string const&)
     )
 
 manpagebugs()
 
     This is the initial release version of tt(oxref). 
 
-manpagesection(ABOUT oxref)
+manpagesection(ABOUT)
 
-    The program bf(oxref) 
+
+    In theory, creating cross reference listings is a complex matter as it
+requires a full syntax analysis of the sources defining a program. Especially
+with complex languages like bf(C++) this is a difficult hurdle to pass. 
+
+    Looking for `cross reference programs' using a search engine returns
+remarkably few hits. LXR is a promising cross referencing program (see
+lurl(http://lxr.linux.no/)), but it requires the use of data base packages,
+making it somewhat complex to use. Other links refer to cross-reference
+programs for textual documents, not programs.
+
+    The complexity of developing a program generating a 
+cross reference listing has baffled me for a long time. Eventually I realized
+that in practice the essential information has already been generated by the
+compiler, when it compiles our source files. So why do it all again?
+
+    Once a program has been compiled one or (usually) more object files are
+available. The linker uses tables of defined and external symbols embedded
+in the object files to connect the various functions. If all requirements can
+be satisfied the linker is able to create a running program.
+
+    Programs like bf(nm)(1) and bf(objdump)(1) can be used to produce human 
+readable output from the information embedded in object files. tt(Oxref) reads
+this information and organizes it, creating a cross reference listing.
+
+    Since all compilable program languages generate identically organized
+object files (or maybe better: generate object files that can be interpreted
+by bf(objdump)(1)), tt(oxref) can broadly be applied. As long as
+bf(objdump)(1) produces sensible output tt(oxref) should be able to generate a
+cross reference listing.
+
+    tt(Oxref)'s name consists of two syllables: tt(o) and tt(xref). The tt(o)
+represents the program bf(objdump)(1), called from tt(oxref) as a child
+program. The important part is of course the cross-referencing of
+symbols. Like the common abbreviation of em(rail-road crossing), em(rail-road
+xing), cross referencing is abbreviated to tt(xref). Hence tt(oxref). 
+
+    Of course, nearly everybody will read tt(oxref) as
+tt(ox-ref). Fortunately, here too we're on familiar ground: Bison, Cow, Gnu,
+Yacc: all are bovine animals. To that important list tt(oxref) adds the Ox.
+
+manpagefiles()
+    
+    An example of tt(oxref)'s own cross reference listing is provided (on
+Debian systems) in the file
+        verb(
+    /usr/share/doc/oxref/oxref.xref.gz
+        )
+
+manpageseealso()
+
+bf(nm)(1), bf(objdump)(1), bf(pattern)(3bobcat), bf(regex)(7)
 
 manpageauthor()
 
