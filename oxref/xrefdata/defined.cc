@@ -5,10 +5,10 @@ void XrefData::defined(std::ostream &out) const
     out << name() << '\n';
 
     if (d_fullSymbol)
-        out  << "    " << d_refName << ":\n";
+        out  << "  Full name: " << symbol() << '\n';
 
     if (d_source) 
-        out << "       " << d_sourceFile << ' ';
+        out << "   Source: " << d_sourceFile << ' ';
 
     if (d_object)
         out << '(' << d_objFile << ')';

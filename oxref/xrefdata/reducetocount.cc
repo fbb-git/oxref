@@ -1,19 +1,12 @@
 #include "xrefdata.ih"
 
-void XrefData::reduceToCount(std::string &symbol) const
+void XrefData::reduceToCount(size_t openParIdx, size_t end)
 {
-    size_t end = d_refName.rfind(')');
-
-    if (end == string::npos)               // no closing parenthesis ???
-        return;
-
     size_t nArgs = 0;
 
-    size_t begin = d_nameIndex + 1;
-
-    for (;  begin != end; ++begin)
+    for (size_t begin = openParIdx + 1;  begin != end; ++begin)
     {
-        switch (d_refName[begin])
+        switch (d_cooked[begin])
         {
             case ' ':           // ignore blanks
             case '\t':
@@ -21,7 +14,7 @@ void XrefData::reduceToCount(std::string &symbol) const
             break;
 
             default:            // skip argument
-                begin = d_refName.find_first_of("<,)", begin);  
+                begin = d_cooked.find_first_of("<,)", begin);  
                 if (begin == end)
                     --begin;
                 ++nArgs;
@@ -34,6 +27,9 @@ void XrefData::reduceToCount(std::string &symbol) const
     }
 
     if (nArgs)
-        symbol = d_refName.substr(d_nameIndex,  + 1) + X2a(nArgs) + ")";
+    {
+        auto iter = d_cooked.begin();
+        d_cooked.replace(iter + openParIdx + 1, iter + end, X2a(nArgs));
+    }
 }
 

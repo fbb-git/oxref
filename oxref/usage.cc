@@ -16,7 +16,7 @@ void usage(std::string const &progname)
     "              count - display function argument counts only\n"
     "              first - only display the first word of the parameter "
                                                                 "types\n"
-    "              <len> - restrict parameter names to the first <len> "
+    "              <len> - restrict parameter types to the first <len> "
                                                                 "characters\n"
     "      --full-symbol (-f)      - display the full symbol names (e.g.,\n"
     "                                including class name prefixes)\n"
@@ -36,6 +36,8 @@ void usage(std::string const &progname)
     "      --xref-source-files (-x)- display the source file names in the \n"
     "                                cross-reference lists\n"
     "      --version (-v)          - show version information and terminate\n"
-    "   args   - explain additional arguments.\n"
+    "\n"
+    "   args   - non-stripped .o or libraries whose symbols must be\n"
+    "            cross-referenced.\n"
     "\n";
 }

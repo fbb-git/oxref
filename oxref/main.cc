@@ -5,31 +5,22 @@ namespace   // the anonymous namespace can be used here
 {
     Arg::LongOption longOptions[] =
     {
-        {"arg", 'a'},
-        {"help", 'h'},
-        {"objdump", Arg::Required},
-        {"object-files", 'o'},
-        {"source-files", 's'},
-        {"full-symbol", 'f'},
-        {"select-pattern",  Arg::Required},
-        {"select",          Arg::Required},
-        {"xref-source-files", 'x'},
-        {"version", 'v'},
+        {"arg",                 'a'},
+        {"help",                'h'},
+        {"objdump",             Arg::Required},
+        {"object-files",        'o'},
+        {"source-files",        's'},
+        {"full-symbol",         'f'},
+        {"select-pattern",      Arg::Required},
+        {"select",              Arg::Required},
+        {"xref-source-files",   'x'},
+        {"version",             'v'},
     };
-//        {"sort-by", 's'},       // may be multiply used
 
     Arg::LongOption const *const longEnd =
                     longOptions +
                     sizeof(longOptions) / sizeof(Arg::LongOption);
 }
-
-//    Pattern Storage::s_reject("^.*\\*UND\\*\\s+\\d+\\s+_"
-//        "|"
-//        "vtable for"
-//        "|"
-//        "typeinfo for"
-//        "|"
-//        "virtual thunk to");
 
 int main(int argc, char **argv)
 try
@@ -51,9 +42,17 @@ try
 }
 catch (Errno const &e)
 {
-    cout << e.why() << "\n";
-
+    cout << e.why() << '\n';
     return 1;
+}
+catch (std::exception const &e)
+{
+    cout << e.what() << '\n';
+    return 1;
+}
+catch (int x)
+{
+    return x;
 }
 catch (...)
 {

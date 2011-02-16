@@ -18,7 +18,9 @@ void XrefData::ctor()
         d_nameIndex == string::npos ?   // none found: use full d_refName
             0
         :
-            d_nameIndex + 1;            // otherwise: d_refName starts beyond :
+            d_nameIndex + 1;            // else: d_refName starts beyond :
+
+    setCooked();
 }
 
 

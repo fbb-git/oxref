@@ -13,6 +13,7 @@ class XrefData
     bool d_isFunction;                  // true: function, false: object
 
     std::string d_refName;              // full name of object or function
+    std::string d_cooked;               // name as processed by -a
 
     size_t d_nameIndex;                 // index where the proper name (after
                                         // its class/namespace) starts
@@ -41,20 +42,24 @@ class XrefData
         void calledFrom(size_t currentIdx);
 
         void defined(std::ostream &out) const;
-        std::string symbol() const;      // returns d_refName
-        char const *name() const;
+        std::string const &symbol() const;// returns d_cooked
+        char const *name() const;         // returns d_cooked[d_nameIndex] 
+
         std::string const &sourceFile() const;
 
         std::vector<size_t> const &usedBy() const;
 
     private:
         void ctor();
-        std::string reduceSymbol(std::string const &symbol) const;
-        void keepFirst() const;
-        void reduceLen(size_t len) const;
-        void reduceToCount(std::string &symbol) const;
-        size_t skipTemplate(size_t begin) const;  // index of 1st <
+        void setCooked();
+        void keepFirst(size_t openParIdx);
+        void reduceLen(size_t openParIdx, size_t len);
+        void reduceToCount(size_t openParIdx, size_t end);
+        size_t skipTemplate(size_t begin) const;    // index of 1st '<'
+                                                    // returns idx of last '>'
 
+        size_t eraseParam(size_t begin);    // returns , or ) position
+        size_t eraseParam(size_t begin, size_t len);
 };
 
 inline std::vector<size_t> const &XrefData::usedBy() const
@@ -64,7 +69,7 @@ inline std::vector<size_t> const &XrefData::usedBy() const
 
 inline  char const *XrefData::name() const
 {
-    return d_refName.c_str() + d_nameIndex;
+    return d_cooked.c_str() + d_nameIndex;
 }
 
 inline std::string const &XrefData::sourceFile() const
@@ -72,9 +77,9 @@ inline std::string const &XrefData::sourceFile() const
     return d_sourceFile;
 }
 
+inline  std::string const &XrefData::symbol() const
+{
+    return d_cooked;
+}
+
 #endif
-
-
-
-
-
