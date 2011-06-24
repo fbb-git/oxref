@@ -1,7 +1,7 @@
 #include "xrefdata.ih"
 
-bool XrefData::isDefined(XrefData const &data, string const &symbol)
+bool XrefData::isDefined(string const &symbol) const
 {
-    return not data.d_sourceFile.empty() && data.d_refName == symbol;
+    return not d_sourceFile.empty() && d_refName == symbol;
 }
         

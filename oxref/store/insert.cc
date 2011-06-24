@@ -13,13 +13,22 @@ void Store::insert(ostream &out, string const &name, bool doSelect) const
     while (true)
     {
         iter = doSelect ?
-                    find_if(iter, end, 
-                        FnWrap::unary(findName, name, d_xrefData)) 
+                    find_if(
+                        iter, end, 
+                        [&](size_t idx)
+                        {
+                            return string(d_xrefData[idx].name()).find(name) 
+                                    == 0;
+                        }
+                    )
                 :
-                    find_if(iter, end, 
-                        FnWrap::unary(findSymbolPattern, 
-                                                namePattern, d_xrefData));
-
+                    find_if(
+                        iter, end, 
+                        [&](size_t idx)
+                        {
+                            return namePattern << d_xrefData[idx].symbol();
+                        }
+                    );
 
         if (iter == end)
             break;

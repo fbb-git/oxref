@@ -47,13 +47,6 @@ class Store
                                   XrefVector const &xref);
         static void usedBy(size_t idx, std::ostream &out, 
                                   XrefVector const &xref);
-
-        static bool name(size_t left, size_t right, 
-                                            XrefVector const &xrefVector);
-        static bool findSymbolPattern(size_t idx, FBB::Pattern &namePattern, 
-                                                XrefVector const &xrefVector);
-        static bool findName(size_t idx, std::string const &name, 
-                                                XrefVector const &xrefVector);
 };
 
 inline std::ostream &operator<<(std::ostream &out, Store const &store)

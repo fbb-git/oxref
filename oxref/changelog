@@ -1,3 +1,12 @@
+oxref (0.90.01)
+
+  * Replaced FnWrap* calls by lambda functions
+
+  * `build' script now recognizes CXXFLAGS and LDFLAGS for, resp. g++ and ld
+     flags. Default values are in INSTALL.im, as before.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Fri, 24 Jun 2011 21:15:18 +0200
+
 oxref (0.90.00)
 
   * Initial release

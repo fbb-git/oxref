@@ -37,9 +37,6 @@ class ObjDump
 
         ObjDump();
         void start();
-
-    private:
-        static void addObject(std::string const &arg, FBB::Process &process);
 };
 
 inline void ObjDump::start()

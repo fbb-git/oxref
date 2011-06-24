@@ -4,10 +4,8 @@
 #include <iostream>
 #include <cstring>
 
-
 #include <bobcat/pattern>
 #include <bobcat/arg>
-#include <bobcat/fnwrap>
 
 using namespace std;
 using namespace FBB;

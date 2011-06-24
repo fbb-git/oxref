@@ -1,7 +1,7 @@
 #include "xrefdata.ih"
 
-bool XrefData::hasSymbol(XrefData const &data, string const &symbol)
+bool XrefData::hasSymbol(string const &symbol) const
 {
-    return data.d_refName == symbol;
+    return d_refName == symbol;
 }
         

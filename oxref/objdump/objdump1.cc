@@ -12,6 +12,12 @@ ObjDump::ObjDump()
 
     d_process.setCommand(odump);
 
-    for_each(arg.argPointers(), arg.argPointers() + arg.nArgs(), 
-        FnWrap::unary(addObject, d_process));
+    for_each(
+        arg.argPointers(), arg.argPointers() + arg.nArgs(), 
+        [&](string const &arg)
+        {
+            d_process += " ";
+            d_process += arg;
+        }
+    );
 }

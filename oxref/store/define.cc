@@ -2,14 +2,24 @@
 
 void Store::define(std::string const &symbol, bool isFunction)
 {
-    auto iter = find_if(d_xrefData.begin(), d_xrefData.end(),
-                    FnWrap::unary(XrefData::isDefined, symbol));
+    auto iter = find_if(
+                    d_xrefData.begin(), d_xrefData.end(),
+                    [&](XrefData const &data)
+                    {
+                        return data.isDefined(symbol);
+                    }
+                );
 
     if (iter != d_xrefData.end())
         return;                         // symbol already defined
 
-    iter = find_if(d_xrefData.begin(), d_xrefData.end(),
-                   FnWrap::unary(XrefData::hasSymbol, symbol));
+    iter = find_if(
+                d_xrefData.begin(), d_xrefData.end(),
+                [&](XrefData const &xrefData)
+                {
+                    return xrefData.hasSymbol(symbol);
+                }
+            );
 
     size_t currentIdx;
 

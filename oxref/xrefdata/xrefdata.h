@@ -34,10 +34,8 @@ class XrefData
         void setLocation(std::string const &sourceFile, 
                  std::string const &objFile);
    
-        static bool isDefined(XrefData const &data, 
-                              std::string const &symbol);
-        static bool hasSymbol(XrefData const &data, 
-                              std::string const &symbol);
+        bool isDefined(std::string const &symbol) const;
+        bool hasSymbol(std::string const &symbol) const;
     
         void calledFrom(size_t currentIdx);
 

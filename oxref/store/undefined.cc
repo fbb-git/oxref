@@ -11,8 +11,14 @@ void Store::undefined(std::string const &symbol)
     // The function currently handled has a currentIdx and from that index
     // the current *UND* symbol is called.
                 
-    auto iter = find_if(d_xrefData.begin(), d_xrefData.end(),
-                    FnWrap::unary(XrefData::hasSymbol, symbol));
+    auto iter = find_if(
+                    d_xrefData.begin(), d_xrefData.end(),
+                    [&](XrefData const &xrefData)
+                    {
+                        return xrefData.hasSymbol(symbol);
+                    }
+                );
+                  //  FnWrap::unary(XrefData::hasSymbol, symbol));
 
     size_t index = iter - d_xrefData.begin();   // index of this symbol
 
