@@ -1,0 +1,15 @@
+#!/bin/bash
+
+WD=`pwd`
+
+cd ../oxref 
+    build man || exit 1
+cd $WD
+
+yodl2html index.yo || exit 1
+
+scp ../oxref/tmp/man*/*.html index.html \
+    fbb,oxref@web.sourceforge.net:htdocs/
+
+cd ../oxref 
+    build distclean
