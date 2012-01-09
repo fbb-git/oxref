@@ -13,8 +13,9 @@ void Store::insertDefined(size_t idx, ostream &out, XrefVector const &xref)
         out << "  Used By:\n";
         for (auto idx: ranger(begin, end))
             usedBy(idx, out, xref);
+
+        out << '\n';
     }
-    out << '\n';
 }
 
 
