@@ -25,15 +25,13 @@ std::ostream &Store::insertInto(std::ostream &out) const
                                d_xrefData[right].name()) < 0;
             }
         );
-    
-        for_each(
-            d_defIdx.begin(), d_defIdx.end(),
-            [&](size_t idx)
-            {
-                insertDefined(idx, out, d_xrefData);
-            }
-        );
+
+        for (auto idx: d_defIdx)    
+            insertDefined(idx, out, d_xrefData);
     }
 
     return out;
 }
+
+
+

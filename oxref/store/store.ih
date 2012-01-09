@@ -6,6 +6,7 @@
 
 #include <bobcat/pattern>
 #include <bobcat/arg>
+#include <bobcat/ranger>
 
 using namespace std;
 using namespace FBB;
