@@ -4,6 +4,7 @@
 #include <bobcat/arg>
 #include <bobcat/x2a>
 #include <bobcat/a2x>
+#include <bobcat/errno>
 
 using namespace std;
 using namespace FBB;
