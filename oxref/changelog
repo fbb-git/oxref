@@ -1,8 +1,14 @@
-oxref (0.90.04)
+oxref (0.90.10)
 
   * Depends on Bobcat 3.00.00
 
- -- Frank B. Brokken <f.b.brokken@rug.nl>  Sun, 06 May 2012 12:35:23 +0200
+  -- TODO: STAMP
+
+oxref (0.90.04)
+
+  * Added missing header
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Wed, 09 May 2012 13:45:58 +0200
 
 oxref (0.90.03)
 
