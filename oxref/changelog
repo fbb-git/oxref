@@ -1,8 +1,10 @@
 oxref (0.90.10)
 
-  * Depends on Bobcat 3.00.00
+  * Depends on Bobcat 3.00.02
+  
+  * Removed superfluous header (undoing the needless 0.90.04 modification).
 
-  -- TODO: STAMP
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Thu, 10 May 2012 14:02:07 +0200
 
 oxref (0.90.04)
 
