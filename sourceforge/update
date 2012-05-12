@@ -11,5 +11,7 @@ yodl2html index.yo || exit 1
 scp ../oxref/tmp/man*/*.html index.html \
     fbb,oxref@web.sourceforge.net:htdocs/
 
+rm index.html
+
 cd ../oxref 
     build distclean
