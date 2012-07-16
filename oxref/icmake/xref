@@ -1,7 +1,0 @@
-void xref(string strip)
-{
-    program(strip);
-
-    md("tmp/doc");
-    system(g_binary + " -foxs liboxref.a > tmp/doc/oxref.xref");
-}
