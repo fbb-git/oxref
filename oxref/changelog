@@ -1,3 +1,15 @@
+oxref (0.90.11)
+
+  * The following #defines in INSTALL.im can be overruled by defining
+    identically named environment variables: 
+        CXX      defines the name of the compiler to use. By default `g++'
+        CXXFLAGS the options passed to the compiler. 
+                 By default `-Wall --std=c++0x -O2 -g'
+        LDFLAGS  the options passed to the linker. By default no options are
+                 passed to the linker.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Wed, 18 Jul 2012 15:19:38 +0200
+
 oxref (0.90.10)
 
   * Depends on Bobcat 3.00.02
