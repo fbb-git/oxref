@@ -1,3 +1,10 @@
+oxref (0.91.00)
+
+  * oxref now returns 0 when called with the -h or -v flags 
+
+
+
+
 oxref (0.90.11)
 
   * The following #defines in INSTALL.im can be overruled by defining

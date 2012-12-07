@@ -64,7 +64,7 @@ catch (std::exception const &e)
 }
 catch (int x)
 {
-    return x;
+    return Arg::instance().option("hv")) ? 0 : x;
 }
 catch (...)
 {
