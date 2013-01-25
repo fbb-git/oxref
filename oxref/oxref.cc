@@ -52,11 +52,6 @@ try
         "\n" <<
         storage << '\n';
 }
-catch (Errno const &e)
-{
-    cout << e.why() << '\n';
-    return 1;
-}
 catch (std::exception const &e)
 {
     cout << e.what() << '\n';
@@ -64,7 +59,7 @@ catch (std::exception const &e)
 }
 catch (int x)
 {
-    return Arg::instance().option("hv")) ? 0 : x;
+    return Arg::instance().option("hv") ? 0 : x;
 }
 catch (...)
 {

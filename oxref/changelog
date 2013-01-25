@@ -2,8 +2,9 @@ oxref (0.91.00)
 
   * oxref now returns 0 when called with the -h or -v flags 
 
+  * catching FBB::Errno in main.cc is superfluous: removed.
 
-
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Fri, 25 Jan 2013 10:38:42 +0100
 
 oxref (0.90.11)
 

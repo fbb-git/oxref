@@ -4,6 +4,7 @@ WD=`pwd`
 
 cd ../oxref 
     build man || exit 1
+
 cd $WD
 
 yodl2html index.yo || exit 1
