@@ -56,7 +56,7 @@ void main(int argc, list argv)
     if (option == "oxref")
     {
         system("icmbuild program " + strip);
-        run("oxref -fxs tmp/lib" LIBRARY ".a > " PROGRAM ".xref");
+        run("tmp/bin/binary -fxs tmp/lib" LIBRARY ".a > " PROGRAM ".xref");
         exit(0);
     }
 

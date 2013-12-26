@@ -8,7 +8,10 @@ oxref (1.00.01)
   * Oxref's no longer uses (deprecated) FBB::Errno exceptions. Instead,
     FBB::Exception exceptions are now used.
 
- -- Frank B. Brokken <f.b.brokken@rug.nl>  Thu, 26 Dec 2013 12:22:39 +0100
+  * 'build oxref' uses the newly built tmp/bin/binary (= oxref) program to
+    create its cross-reference listing.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Thu, 26 Dec 2013 12:33:38 +0100
   
 oxref (0.91.00)
 

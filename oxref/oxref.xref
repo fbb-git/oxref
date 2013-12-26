@@ -1,7 +1,7 @@
-oxref by Frank B. Brokken (f.b.brokken@rug.nl)
-oxref V0.91.00 2012-2013
+binary by Frank B. Brokken (f.b.brokken@rug.nl)
+binary V1.00.01 2012-2013
 
-CREATED Thu, 26 Dec 2013 11:28:28 +0000
+CREATED Thu, 26 Dec 2013 11:32:33 +0000
 CROSS REFERENCE FOR: -fxs tmp/libmodules.a 
 ----------------------------------------------------------------------
 
@@ -211,16 +211,16 @@ Store()
     storage1.cc: Storage::Storage()
 
 undefined(std::string const&)
-  Full name: Storage::undefined(std::string const&)
-  Source:    undefined.cc 
-  Used By:
-    pushback.cc: Storage::push_back(std::string const&)
-
-undefined(std::string const&)
   Full name: Store::undefined(std::string const&)
   Source:    undefined.cc 
   Used By:
     undefined.cc: Storage::undefined(std::string const&)
+
+undefined(std::string const&)
+  Full name: Storage::undefined(std::string const&)
+  Source:    undefined.cc 
+  Used By:
+    pushback.cc: Storage::push_back(std::string const&)
 
 usedBy(unsigned int, std::ostream&, std::vector<XrefData, std::allocator<XrefData> > const&)
   Full name: Store::usedBy(unsigned int, std::ostream&, std::vector<XrefData, std::allocator<XrefData> > const&)
