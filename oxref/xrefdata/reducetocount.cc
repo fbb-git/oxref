@@ -29,7 +29,7 @@ void XrefData::reduceToCount(size_t openParIdx, size_t end)
     if (nArgs)
     {
         auto iter = d_cooked.begin();
-        d_cooked.replace(iter + openParIdx + 1, iter + end, X2a(nArgs));
+        d_cooked.replace(iter + openParIdx + 1, iter + end, to_string(nArgs));
     }
 }
 

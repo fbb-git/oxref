@@ -1,3 +1,15 @@
+oxref (1.00.01)
+
+  * Since oxref's been around for over a year without encountering any
+    serious problems, its version was bumped to slightly over 1.00.
+
+  * Oxref no longer depends on bobcat's A2x and X2a classes
+
+  * Oxref's no longer uses (deprecated) FBB::Errno exceptions. Instead,
+    FBB::Exception exceptions are now used.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Thu, 26 Dec 2013 12:22:39 +0100
+  
 oxref (0.91.00)
 
   * oxref now returns 0 when called with the -h or -v flags 

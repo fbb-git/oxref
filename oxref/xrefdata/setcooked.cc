@@ -22,9 +22,7 @@ void  XrefData::setCooked()
         keepFirst(begin);
     else
     {
-        size_t len = A2x(option);
-        if (A2x::lastFail())
-            throw Errno(1, arg.basename().c_str()) << " -a: invalid argument";
+        size_t len = stoul(option);
 
         if (len < 5)
             len = 5;

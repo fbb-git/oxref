@@ -9,8 +9,8 @@ size_t XrefData::skipTemplate(size_t begin) const
         begin = d_cooked.find_first_of("<>", begin);
 
         if (begin == string::npos)
-            throw Errno(1, "skipTemplate: invalid template spec. in ") <<
-                                                                    d_cooked;
+            throw Exception() << 
+                    "skipTemplate: invalid template spec. in " << d_cooked;
         if (d_cooked[begin] == '<')
             ++level;
         else

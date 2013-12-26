@@ -1,9 +1,9 @@
 #include "xrefdata.h"
 
 #include <iostream>
+
 #include <bobcat/arg>
-#include <bobcat/x2a>
-#include <bobcat/a2x>
+#include <bobcat/exception>
 
 using namespace std;
 using namespace FBB;
