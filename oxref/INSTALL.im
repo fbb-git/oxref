@@ -1,23 +1,17 @@
     // Specify the name of the program created by this project:
 #define PROGRAM             "oxref"
 
-    // When defined, these overrule COMPILER and COMPILER_OPTIONS
-    // COMPILER and COMPILER_OPTIONS are now obsolete
-    // Instead of CXX and CXXFLAGS, CC and CFLAGS can be used.
-    // Their #define values are overruled by identically named environment
-    // variables. 
-
-#define CXX                 "g++"
+//#define CXX                 "g++"
+#define CXX                 "g++-5"
     // the compiler to use. 
 
-#define CXXFLAGS            "--std=c++0x -Wall -O2 -g"
+#define CXXFLAGS            "--std=c++0x -Wall -O2"
     // the compiler options to use.
 
 #define LDFLAGS             ""
     // flags passed to the linker
 
-// =========================================================================
-// The following locations are overruled by `build install' arguments
+// The following locations can be overruled by `build install' arguments
 
 #define BINARY     "/usr/bin/"${PROGRAM}
     // the full path of the final program

@@ -3,7 +3,7 @@
 ObjDump::const_iterator &ObjDump::const_iterator::operator++() 
 {
     if (d_iterate)
-        d_iterate = std::getline(*d_process, d_line);
+        d_iterate = std::getline(*d_process, d_line).good();
 
     return *this;    
 }

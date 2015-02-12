@@ -1,3 +1,10 @@
+oxref (1.00.02)
+
+  * Fixed compilation errors that emerged with g++-5, reported by Matthias
+    Klose. 
+  
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Thu, 12 Feb 2015 18:13:30 +0100
+
 oxref (1.00.01)
 
   * Since oxref's been around for over a year without encountering any
