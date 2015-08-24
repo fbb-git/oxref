@@ -10,6 +10,7 @@
 #include "icmake/clean"
 #include "icmake/manpage"
 #include "icmake/install"
+#include "icmake/github"
 
 string  g_cwd = chdir("");  // initial working directory
 
@@ -32,8 +33,8 @@ void main(int argc, list argv)
     if (option != "")
         special();
 
-    if (option == "sourceforge")
-        exit(0);
+    if (option == "github")
+        github();
 
     if (option == "man")
         manpage();
@@ -76,7 +77,6 @@ void main(int argc, list argv)
         "   distclean            - clean + fully remove tmp/\n"
         "   library              - build " PROGRAM "'s library\n"
         "   man                  - build the man-page (requires Yodl)\n"
-        "   manual               - build the manual (requires Yodl)\n"
         "   program [strip]      - build " PROGRAM " (optionally strip the\n"
         "                          executable)\n"
         "   oxref [strip]        - same a `program', also builds xref file\n"
@@ -87,7 +87,8 @@ void main(int argc, list argv)
         "                          (by default below `" MAN "')\n"
         "   install std [base]   - install standard docs below `base'\n"
         "                          (by default below `" STD "')\n"
-        "   sourceforge          - prepare sourceforge's index update\n"
+        "   github               - prepare github's gh-pages update\n"
+        "                          (internal use only)\n"
         "\n"
         "If the environment variable DRYRUN is defined, no commands are\n"
         "actually executed\n"
