@@ -1,3 +1,9 @@
+oxref (1.00.03)
+
+  * Standardized the (de)installation procedures
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Sat, 03 Oct 2015 11:11:25 +0200
+
 oxref (1.00.02)
 
   * Fixed compilation errors that emerged with g++-5, reported by Matthias
