@@ -1,26 +1,40 @@
     // Specify the name of the program created by this project:
 #define PROGRAM             "oxref"
 
-#define CXX                 "g++"
-//#define CXX                 "g++-5"
     // the compiler to use. 
+#define CXX                 "g++"
 
-#define CXXFLAGS            "--std=c++0x -Wall -O2"
     // the compiler options to use.
+#define CXXFLAGS            "--std=c++14 -Wall -O2 -fdiagnostics-color=never"
 
-#define LDFLAGS             ""
     // flags passed to the linker
+#define LDFLAGS             ""
 
-// The following locations can be overruled by `build install' arguments
+#define CPOPTS
 
+// COMPONENTS TO INSTALL
+// =====================
+
+    // For an operational non-Debian installation, you probably must be
+    // `root'.
+
+    // If necessary, adapt DOC, HDR, LIB and MAN (below) to your situation.
+    // The provided locations are used by Debian Linux.
+
+    // With 'build install' you can dynamically specify a location to prepend
+    // to the locations configured here, and select which components you want 
+    // to install
+
+// ONLY USE ABSOLUTE DIRECTORY NAMES:
+
+    // the final program
 #define BINARY     "/usr/bin/"${PROGRAM}
-    // the full path of the final program
 
-#define MAN     "/usr/share/man/man1"
-    // the directory whre the manual page is stored
-
-#define STD     "/usr/share/doc/"${PROGRAM}
     // the directory where the standard documentation is stored 
+#define DOC     "/usr/share/doc/"${PROGRAM}
+
+    // the directory whre the manual page is stored
+#define MAN     "/usr/share/man/man1"
 
 
 
