@@ -36,7 +36,7 @@ void main(int argc, list argv)
     string strip;
     int idx;
 
-    for (idx = sizeof(argv); idx--; )
+    for (idx = listlen(argv); idx--; )
     {
         if (argv[idx] == "-q")
         {
@@ -137,9 +137,6 @@ void main(int argc, list argv)
         "   github               - prepare github's gh-pages update\n"
         "                          (internal use only)\n"
         "\n"
-        "If the environment variable DRYRUN is defined, no commands are\n"
-        "actually executed\n"
-        "\n"
     );
-    exit(1);
+    exit(0);
 }

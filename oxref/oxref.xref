@@ -1,7 +1,7 @@
 binary by Frank B. Brokken (f.b.brokken@rug.nl)
-binary V1.00.01 2012-2013
+binary V1.00.05 2012-2015
 
-CREATED Thu, 26 Dec 2013 11:32:33 +0000
+CREATED Mon, 14 Dec 2015 13:22:04 +0000
 CROSS REFERENCE FOR: -fxs tmp/libmodules.a 
 ----------------------------------------------------------------------
 
@@ -9,28 +9,28 @@ author
   Full name: Icmbuild::author
   Source:    version.cc 
   Used By:
-    usage.cc: usage(std::string const&)
+    usage.cc: usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 calledFrom(unsigned int)
   Full name: XrefData::calledFrom(unsigned int)
   Source:    calledfrom.cc 
   Used By:
-    undefined.cc: Store::undefined(std::string const&)
+    undefined.cc: Store::undefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 ctor()
   Full name: XrefData::ctor()
   Source:    ctor.cc 
   Used By:
-    xrefdata2.cc: XrefData::XrefData(std::string const&, std::string const&, bool, std::string const&)
-    xrefdata3.cc: XrefData::XrefData(std::string const&)
+    xrefdata2.cc: XrefData::XrefData(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+    xrefdata3.cc: XrefData::XrefData(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-define(std::string const&, bool)
-  Full name: Store::define(std::string const&, bool)
+define(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
+  Full name: Store::define(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
   Source:    define.cc 
   Used By:
-    setfunction.cc: Store::setFunction(std::string const&)
-    setobject.cc: Store::setObject(std::string const&)
-    setsource.cc: Store::setSource(std::string const&)
+    setfunction.cc: Store::setFunction(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+    setobject.cc: Store::setObject(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+    setsource.cc: Store::setSource(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 defined(std::ostream&) const
   Full name: XrefData::defined(std::ostream&) const
@@ -50,21 +50,21 @@ eraseParam(unsigned int, unsigned int)
   Used By:
     reducelen.cc: XrefData::reduceLen(unsigned int, unsigned int)
 
-function(std::string const&)
-  Full name: Storage::function(std::string const&)
+function(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Storage::function(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    function.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-hasSymbol(std::string const&) const
-  Full name: XrefData::hasSymbol(std::string const&) const
+hasSymbol(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
+  Full name: XrefData::hasSymbol(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
   Source:    hassymbol.cc 
   Used By:
-    define.cc: Store::define(std::string const&, bool)
-    undefined.cc: Store::undefined(std::string const&)
+    define.cc: Store::define(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
+    undefined.cc: Store::undefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-insert(std::ostream&, std::string const&, bool) const
-  Full name: Store::insert(std::ostream&, std::string const&, bool) const
+insert(std::ostream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) const
+  Full name: Store::insert(std::ostream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) const
   Source:    insert.cc 
   Used By:
     insertinto.cc: Store::insertInto(std::ostream&) const
@@ -73,14 +73,14 @@ insertDefined(unsigned int, std::ostream&, std::vector<XrefData, std::allocator<
   Full name: Store::insertDefined(unsigned int, std::ostream&, std::vector<XrefData, std::allocator<XrefData> > const&)
   Source:    insertdefined.cc 
   Used By:
-    insert.cc: Store::insert(std::ostream&, std::string const&, bool) const
+    insert.cc: Store::insert(std::ostream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) const
     insertinto.cc: Store::insertInto(std::ostream&) const
 
-isDefined(std::string const&) const
-  Full name: XrefData::isDefined(std::string const&) const
+isDefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
+  Full name: XrefData::isDefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
   Source:    isdefined.cc 
   Used By:
-    define.cc: Store::define(std::string const&, bool)
+    define.cc: Store::define(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
 
 keepFirst(unsigned int)
   Full name: XrefData::keepFirst(unsigned int)
@@ -88,17 +88,17 @@ keepFirst(unsigned int)
   Used By:
     setcooked.cc: XrefData::setCooked()
 
-object(std::string const&)
-  Full name: Storage::object(std::string const&)
+object(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Storage::object(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    object.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-objFile(std::string const&)
-  Full name: Storage::objFile(std::string const&)
+objFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Storage::objFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    objfile.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 operator++()
   Full name: ObjDump::const_iterator::operator++()
@@ -122,37 +122,37 @@ s_abs
   Full name: Storage::s_abs
   Source:    data.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 s_g_F
   Full name: Storage::s_g_F
   Source:    data.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 s_g_O
   Full name: Storage::s_g_O
   Source:    data.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 s_objFile
   Full name: Storage::s_objFile
   Source:    data.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 s_reject
   Full name: Storage::s_reject
   Source:    data.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 s_UND
   Full name: Storage::s_UND
   Source:    data.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 setCooked()
   Full name: XrefData::setCooked()
@@ -160,35 +160,35 @@ setCooked()
   Used By:
     ctor.cc: XrefData::ctor()
 
-setFunction(std::string const&)
-  Full name: Store::setFunction(std::string const&)
+setFunction(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Store::setFunction(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    setfunction.cc 
   Used By:
-    function.cc: Storage::function(std::string const&)
+    function.cc: Storage::function(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-setLocation(std::string const&, std::string const&)
-  Full name: XrefData::setLocation(std::string const&, std::string const&)
+setLocation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: XrefData::setLocation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    setlocation.cc 
   Used By:
-    define.cc: Store::define(std::string const&, bool)
+    define.cc: Store::define(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
 
-setObject(std::string const&)
-  Full name: Store::setObject(std::string const&)
+setObject(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Store::setObject(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    setobject.cc 
   Used By:
-    object.cc: Storage::object(std::string const&)
+    object.cc: Storage::object(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-setObjfile(std::string const&)
-  Full name: Store::setObjfile(std::string const&)
+setObjfile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Store::setObjfile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    setobjfile.cc 
   Used By:
-    objfile.cc: Storage::objFile(std::string const&)
+    objfile.cc: Storage::objFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-setSource(std::string const&)
-  Full name: Store::setSource(std::string const&)
+setSource(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Store::setSource(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    setsource.cc 
   Used By:
-    sourcefile.cc: Storage::sourceFile(std::string const&)
+    sourcefile.cc: Storage::sourceFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 skipTemplate(unsigned int) const
   Full name: XrefData::skipTemplate(unsigned int) const
@@ -198,11 +198,11 @@ skipTemplate(unsigned int) const
     eraseparam2.cc: XrefData::eraseParam(unsigned int, unsigned int)
     reducetocount.cc: XrefData::reduceToCount(unsigned int, unsigned int)
 
-sourceFile(std::string const&)
-  Full name: Storage::sourceFile(std::string const&)
+sourceFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Storage::sourceFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    sourcefile.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 Store()
   Full name: Store::Store()
@@ -210,17 +210,17 @@ Store()
   Used By:
     storage1.cc: Storage::Storage()
 
-undefined(std::string const&)
-  Full name: Store::undefined(std::string const&)
+undefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Store::undefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    undefined.cc 
   Used By:
-    undefined.cc: Storage::undefined(std::string const&)
+    undefined.cc: Storage::undefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-undefined(std::string const&)
-  Full name: Storage::undefined(std::string const&)
+undefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: Storage::undefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    undefined.cc 
   Used By:
-    pushback.cc: Storage::push_back(std::string const&)
+    pushback.cc: Storage::push_back(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 usedBy(unsigned int, std::ostream&, std::vector<XrefData, std::allocator<XrefData> > const&)
   Full name: Store::usedBy(unsigned int, std::ostream&, std::vector<XrefData, std::allocator<XrefData> > const&)
@@ -232,24 +232,24 @@ version
   Full name: Icmbuild::version
   Source:    version.cc 
   Used By:
-    usage.cc: usage(std::string const&)
+    usage.cc: usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-XrefData(std::string const&)
-  Full name: XrefData::XrefData(std::string const&)
+XrefData(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: XrefData::XrefData(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    xrefdata3.cc 
   Used By:
-    undefined.cc: Store::undefined(std::string const&)
+    undefined.cc: Store::undefined(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
-XrefData(std::string const&, std::string const&, bool, std::string const&)
-  Full name: XrefData::XrefData(std::string const&, std::string const&, bool, std::string const&)
+XrefData(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  Full name: XrefData::XrefData(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
   Source:    xrefdata2.cc 
   Used By:
-    define.cc: Store::define(std::string const&, bool)
+    define.cc: Store::define(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)
 
 years
   Full name: Icmbuild::years
   Source:    version.cc 
   Used By:
-    usage.cc: usage(std::string const&)
+    usage.cc: usage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
 
 
