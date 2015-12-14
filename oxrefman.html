@@ -8,10 +8,10 @@
 <link rev="made" href="mailto:Frank B. Brokken: f.b.brokken@rug.nl">
 </head>
 <body text="#27408B" bgcolor="#FFFAF0">
-<hr>
-<h1>oxref</h1>
-<h2>oxref.1.00.04.tar.gz</h2>
-<h2>2012-2015</h2>
+<hr/>
+<h1 id="title">oxref</h1>
+<h2 id="author">oxref.1.00.05.tar.gz</h2>
+<h2 id="date">2012-2015</h2>
 
 <!DOCTYPE html><html><head>
 <meta charset="UTF-8">
@@ -24,8 +24,8 @@
 <link rev="made" href="mailto:Frank B. Brokken: f.b.brokken@rug.nl">
 </head>
 <body text="#27408B" bgcolor="#FFFAF0">
-<hr>
-<h1></h1>
+<hr/>
+<h1 id="title"></h1>
 
 <!DOCTYPE html><html><head>
 <meta charset="UTF-8">
@@ -41,10 +41,10 @@
 <link rev="made" href="mailto:Frank B. Brokken: f.b.brokken@rug.nl">
 </head>
 <body text="#27408B" bgcolor="#FFFAF0">
-<hr>
-<h1>oxref(1)</h1>
-<h2>oxref.1.00.04.tar.gz oxref - cross reference utility</h2>
-<h2>2012-2015</h2>
+<hr/>
+<h1 id="title">oxref(1)</h1>
+<h2 id="author">oxref.1.00.05.tar.gz oxref - cross reference utility</h2>
+<h2 id="date">2012-2015</h2>
 
 
 <p>
@@ -53,9 +53,9 @@
 <p>
 
 <h2>SYNOPSIS</h2>
-       <strong>oxref</strong> [OPTIONS] <em>arguments</em> <br>
-        [OPTIONS] - see the <strong>OPTIONS</strong> section below <br>
-        arguments - object files and/or libraries to process <br>
+       <strong>oxref</strong> [OPTIONS] <em>arguments</em> <br/>
+        [OPTIONS] - see the <strong>OPTIONS</strong> section below <br/>
+        arguments - object files and/or libraries to process <br/>
 <p>
 The cross reference listing is written to the standard output stram.
 <p>
@@ -98,8 +98,8 @@ If available, single letter options are listed between parentheses
 following their associated long-option variants. Single letter options require
 arguments if their associated long options require arguments as well.
     <ul>
-    <li> <strong>--arg</strong>=<em>mode</em> (<strong>-a</strong>)<br>
-        Mode specifies the way the output is abbreviated:<br>
+    <li> <strong>--arg</strong>=<em>mode</em> (<strong>-a</strong>)<br/>
+        Mode specifies the way the output is abbreviated:<br/>
 <p>
 <strong>count</strong> - function parameters are suppressed; instead the number of
 arguments required by a function is shown in its parameter list. Example:
@@ -153,7 +153,7 @@ insertDefined(unsigned int, std::ostream&amp;, std::vector&lt;XrefData,
 </pre>
 
 <p>
-<li> <strong>--full-symbol</strong> <strong>-f</strong><br>
+<li> <strong>--full-symbol</strong> <strong>-f</strong><br/>
         The full names of the symbols are shown, in addition to the plain
 symbol names. Full names include class names and/or namespace
 identifiers. Example: 
@@ -167,33 +167,33 @@ insertDefined(unsigned int, std::ostream&amp;, std::vector&lt;XrefData,
 </pre>
 
 <p>
-<li> <strong>--help</strong> (<strong>-h</strong>)<br>
+<li> <strong>--help</strong> (<strong>-h</strong>)<br/>
            Basic usage information is written to the standard error stream.
 <p>
-<li> <strong>--object-files</strong> (<strong>-o</strong>)<br>
+<li> <strong>--object-files</strong> (<strong>-o</strong>)<br/>
             Include the name of object files containing the symbols in the
         cross reference listing
 <p>
-<li> <strong>--select</strong>=<em>name</em><br>
+<li> <strong>--select</strong>=<em>name</em><br/>
             Only display the cross-reference of <em>name</em>, where <em>name</em> 
         is the (case sensitive) initial substring of a symbol
 <p>
-<li> <strong>--select-pattern</strong>=<em>regex</em><br>
+<li> <strong>--select-pattern</strong>=<em>regex</em><br/>
             Only display the cross-reference of symbols matching the regular
         expression <em>regex</em>, where <em>regex</em> is a regular expression matching
         the <strong>regex</strong>(7) specification, including the extensions offered by 
         the <strong>pattern</strong>(3bobcat) <strong>Pattern</strong> class. Case sensitive matching is
         used here, too.
 <p>
-<li> <strong>--source-files</strong> (<strong>-s</strong>)<br>
+<li> <strong>--source-files</strong> (<strong>-s</strong>)<br/>
             Include the name of source files containing the symbols in the
         cross reference listing
 <p>
-<li> <strong>--xref-source-files</strong> (<strong>-x</strong>)<br>
+<li> <strong>--xref-source-files</strong> (<strong>-x</strong>)<br/>
             Include the name of source files containing the used symbols in
         the cross reference listing
 <p>
-<li> <strong>--version</strong> (<strong>-v</strong>)<br>
+<li> <strong>--version</strong> (<strong>-v</strong>)<br/>
            <em>Oxref</em>'s version number is written to the standard error stream.
     </ul>    
 <p>
