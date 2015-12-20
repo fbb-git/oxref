@@ -1,6 +1,8 @@
 #!/bin/bash
 PROJECT=oxref
 
+cd ~/git/${PROJECT}/src
+
 if [ -e /usr/share/common-licenses/GPL ] ; then
     cp /usr/share/common-licenses/GPL ${PROJECT}/LICENSE
 fi
@@ -14,7 +16,7 @@ tgz()
 {
     ln -s ${PROJECT} ${DISTRIBUTION}        # distribution's dir name
     tar czvf $1 --exclude-from=excluded  ${DISTRIBUTION}/*
-    rm ${DISTRIBUTION}                      # rm the link
+    rm ${DISTRIBUTION}  ${PROJECT}/LICENSE   # rm the link and LICENSE
 }
 
 case "$1" in 
