@@ -2,6 +2,6 @@
 
 void Storage::function(std::string const &symbol)
 {
-    // Note: symbols may multiply appear in objfiles
+    // Note: symbols may repeatedly appear in objfiles
     d_store.setFunction(symbol);
 }

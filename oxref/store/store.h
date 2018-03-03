@@ -4,6 +4,7 @@
 #include <iosfwd>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 #include "../xrefdata/xrefdata.h"
 
@@ -26,6 +27,10 @@ class Store
     XrefVector d_xrefData;
     mutable std::vector<size_t> d_defIdx;       // indices of defined 
                                                 // functions/objects
+
+//                                            // index in d_xrefData where
+//                                            // a symbol is stored
+//    std::unordered_map<std::string, size_t> d_symbolMap;
 
     public:
         Store();

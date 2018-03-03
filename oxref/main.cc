@@ -16,9 +16,7 @@ namespace
         {"version",             'v'},
     };
 
-    Arg::LongOption const *const longEnd =
-                    longOptions +
-                    sizeof(longOptions) / sizeof(Arg::LongOption);
+    Arg::LongOption const *const longEnd = longOptions + size(longOptions);
 }
 
 int main(int argc, char **argv)

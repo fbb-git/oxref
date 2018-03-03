@@ -18,14 +18,13 @@ void Store::undefined(std::string const &symbol)
                         return xrefData.hasSymbol(symbol);
                     }
                 );
-                  //  FnWrap::unary(XrefData::hasSymbol, symbol));
 
     size_t index = iter - d_xrefData.begin();   // index of this symbol
 
     if (iter == d_xrefData.end())               // symbol not yet defined
     {
         index = d_xrefData.size();
-        d_xrefData.push_back(XrefData(symbol)); // define the symbol
+        d_xrefData.push_back(XrefData{ symbol });   // define the symbol
     }
 
     d_xrefData[index].calledFrom(d_currentIdx);

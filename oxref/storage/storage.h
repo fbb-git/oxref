@@ -27,6 +27,8 @@ class Storage
         typedef value_type const &const_reference;
 
         Storage();
+                                    // interpret lines from objdump
+                                    // using the functions below
         void push_back(std::string const &line);
 
     private:
