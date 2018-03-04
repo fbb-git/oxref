@@ -1,3 +1,16 @@
+oxref (2.00.00)
+
+  * Reorganized the internal data, using an unordered_map in Store
+
+  * Added documentation/README.setup describing the program's flow
+
+  * Added option --simplify to use a file containing simplified type
+    definitions. 
+
+WIP
+
+
+
 oxref (1.00.06)
 
   * Updated entries in the 'required' file.
