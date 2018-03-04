@@ -7,34 +7,45 @@
 
 class XrefData
 {
-    std::string d_sourceFile;           // defined, unless empty
-    std::string d_objFile;
-
-    bool d_isFunction;                  // true: function, false: object
-
     std::string d_refName;              // full name of object or function
-    std::string d_cooked;               // name as processed by -a
 
-    size_t d_nameIndex;                 // index where the proper name (after
-                                        // its class/namespace) starts
+    size_t d_nameIndex = 0;             // index where the entity's proper
+                                        // name (beyond its class/namespace
+                                        // specification) starts  
 
-    std::vector<size_t> d_calledFrom;
+    std::string d_cooked;               // name as processed by the -a option
 
-    bool d_source;
-    bool d_object;
+    std::string d_sourceFile;           // d_refName's definition is
+                                        // available, otherwise (if empty)
+                                        // d_refName is referred to, but its
+                                        // definition record is not available
+                                        // from objdump's output. 
+
+    std::string d_objFile;              // name of the objfile containing
+                                        // d_refName
+
+    bool d_isFunction = false;          // true: function, false: object
+
+    std::vector<size_t> d_calledFrom;   // Indices in Store's d_xrefData
+                                        // vector of entities that call the
+                                        // current entity
+
+    bool d_source = false;
+    bool d_object = false;
     bool d_fullSymbol;
 
     public:
-        XrefData();
-        XrefData(std::string const &sourceFile, 
+
+        XrefData(std::string const &sourceFile,             // 2
                  std::string const &objFile, 
                  bool isFunction, std::string const &symbol);
-        XrefData(std::string const &symbol);
+        XrefData(std::string const &symbol);                // 3
 
         void setLocation(std::string const &sourceFile, 
                  std::string const &objFile);
-   
-        bool isDefined(std::string const &symbol) const;
+
+        bool complete() const;
+
         bool hasSymbol(std::string const &symbol) const;
     
         void calledFrom(size_t currentIdx);
@@ -48,7 +59,7 @@ class XrefData
         std::vector<size_t> const &usedBy() const;
 
     private:
-        void ctor();
+        void init();
         void setCooked();
         void keepFirst(size_t openParIdx);
         void reduceLen(size_t openParIdx, size_t len);
@@ -59,6 +70,11 @@ class XrefData
         size_t eraseParam(size_t begin);    // returns , or ) position
         size_t eraseParam(size_t begin, size_t len);
 };
+
+inline bool XrefData::complete() const
+{
+    return not d_sourceFile.empty();
+}
 
 inline std::vector<size_t> const &XrefData::usedBy() const
 {

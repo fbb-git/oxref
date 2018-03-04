@@ -1,6 +1,6 @@
 #include "xrefdata.ih"
 
-void XrefData::ctor()
+void XrefData::init()
 {
     Arg &arg = Arg::instance();
 

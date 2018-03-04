@@ -1,34 +1,35 @@
 #include "store.ih"
 
-std::ostream &Store::insertInto(std::ostream &out) const
+std::ostream &Store::insertInto(std::ostream &out)
 {
     Arg &arg = Arg::instance();
-
-    bool doSelect;
 
     string entity;
     if 
     (
-        (doSelect = arg.option(&entity, "select"))
-        || 
-        arg.option(&entity, "select-pattern")
+        bool doSelect = arg.option(&entity, "select");
+        doSelect || arg.option(&entity, "select-pattern")
     )
-        insert(out, entity, doSelect);
-    else
-    {
-        sort(
-            d_defIdx.begin(), d_defIdx.end(), 
-            [&](size_t left, size_t right)
-            {
-                return 
-                    strcasecmp(d_xrefData[left].name(), 
-                               d_xrefData[right].name()) < 0;
-            }
-        );
+        return doSelect ?
+                    insertSelect(out, entity)
+                :
+                    insertPattern(out, entity);
 
-        for (auto idx: d_defIdx)    
-            insertDefined(idx, out, d_xrefData);
-    }
+    vector<size_t> support(d_xrefData.size());
+    for (size_t idx = 0, end = support.size(); idx != end; ++idx)
+        support[idx] = idx;
+
+    sort(
+        support.begin(), support.end(), 
+        [&](size_t lhs, size_t rhs)
+        {
+            return strcasecmp(d_xrefData[lhs]->name(), 
+                              d_xrefData[rhs]->name()) < 0;
+        }
+    );
+
+    for (size_t idx: support)    
+        insertDefined(out, d_xrefData[idx], d_xrefData);
 
     return out;
 }

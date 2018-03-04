@@ -1,0 +1,209 @@
+Records produced by objdump look like this:
+
+    11notify.o:     file format elf64-x86-64
+    
+    SYMBOL TABLE:
+    0000000000000000 l    df *ABS*  0000000000000000 notify.cc
+    0000000000000000 l    d  .text  0000000000000000 .text
+    0000000000000000 l    d  .data  0000000000000000 .data
+    0000000000000000 l    d  .bss   0000000000000000 .bss
+    0000000000000000 l    d  .text.startup  0000000000000000 .text.startup
+    0000000000000000 l     F .text.startup  000000000000002e _GLOBAL__sub_I__ZN17RotatingStreambuf6notifyEv
+    0000000000000000 l     O .bss   0000000000000001 std::__ioinit
+    0000000000000000 l    d  .init_array    0000000000000000 .init_array
+    0000000000000000 l    d  .note.GNU-stack        0000000000000000 .note.GNU-stack
+    0000000000000000 l    d  .eh_frame      0000000000000000 .eh_frame
+    0000000000000000 l    d  .comment       0000000000000000 .comment
+    0000000000000000 g     F .text  0000000000000032 RotatingStreambuf::notify()
+    0000000000000000         *UND*  0000000000000000 RotatingStreambuf::s_rotate
+    0000000000000000         *UND*  0000000000000000 RotatingStreambuf::s_semaphore
+    0000000000000000         *UND*  0000000000000000 _GLOBAL_OFFSET_TABLE_
+    0000000000000000         *UND*  0000000000000000 FBB::Semaphore::notify()
+    0000000000000000         *UND*  0000000000000000 RotatingStreambuf::s_rotateThread
+    0000000000000000         *UND*  0000000000000000 std::thread::join()
+    0000000000000000         *UND*  0000000000000000 std::ios_base::Init::Init()
+    0000000000000000         *UND*  0000000000000000 std::ios_base::Init::~Init()
+    0000000000000000         *UND*  0000000000000000 .hidden __dso_handle
+    0000000000000000         *UND*  0000000000000000 __cxa_atexit
+
+The top-line (file format) starts a new entry, and shows the object name in,
+e.g., a library and the file format. 
+
+
+main
+====
+
+main() uses ObjDump to generate objdump's output, which is retrieved,
+line-by-line from its begin() and end() members. 
+
+Each retrieved line is then stored in a Storage object using
+std::copy. Storage offers a member push_back so back_inserter can be used.
+
+Storage
+=======
+
+Storage::push_back uses pattern matching to determine what to do. Recognized
+lines are stored in its Store d_store object. 
+
+Using the above example of an objdump record for illustration:
+
+*   Top lines, like
+
+        11notify.o: file format elf64-x86-64
+    
+    provide names of object files, processed by objFile(), calling
+    d_store.setObjfile.
+    
+*   ABS lines, like
+
+        0000000000000000 l    df *ABS*  0000000000000000 notify.cc
+    
+    provide their source file names, processed by sourceFile(), calling
+    d_store.setSource.
+ 
+*   UND lines, like
+
+        0000000000000000         *UND*  0000000000000000 RotatingStreambuf::s_rotate
+
+    provide names of external references used by the function defined in the
+    objdump record. These external references may be data (like s_rotate) but
+    may also be references to functions, like
+
+        0000000000000000         *UND*  0000000000000000 Options::instance()
+
+    UND lines are processed by undefined(), calling d_store.undefined.
+ 
+*   g-F lines, like
+
+        0000000000000000 g     F .text  0000000000000032 RotatingStreambuf::notify()
+
+    provide the signatures of functions: these are identifiable entities in
+    d_store. g-F lines are processed by function(), calling d_store.setFunction.
+
+*   g-O lines, like 
+
+        0000000000000038 g     O .data  0000000000000008 Icmbuild::version
+    or
+        0000000000000000 g     O .bss   0000000000000040 g_nic
+
+    define global data. g-O lines are processed by objects(), calling
+    d_store.setObject.
+
+Once the objdump info has been processed Storage's insertion operator (called
+from main) inserts the organized cross-reference info into the output
+stream. In fact, it inserts its Store d_store object into the output stream
+(see below at Store)
+
+
+XrefData
+========
+
+Information extracted from received objdump records is stored in XrefData
+objects. These objects contain the following data members:
+
+
+    std::string d_refName;              full name of object or function.
+
+    size_t d_nameIndex;                 index where the entity's proper name
+                                        (after its class/namespace) starts
+
+    std::string d_cooked;               reduced name as requested by the -a
+                                        option.
+
+    std::string d_sourceFile;           if this remains empty then the entity
+                                        mentioned in d_refName is not defined
+                                        in the provided object file(s) and
+                                        library/ies. 
+
+    std::string d_objFile;              the name of the object file containing
+                                        d_refName 
+
+    bool d_isFunction;                  true: the entity is a function,
+                                        otherwise it is data
+
+    std::vector<size_t> d_calledFrom;   Indices in Store's d_xrefData
+                                        vector of entities that call the
+                                        current entity
+
+
+    bool d_source;
+    bool d_object;
+    bool d_fullSymbol;
+
+
+Store
+=====
+
+Store uses the following data:
+
+    std::string d_objFile;              holds the name of the object file
+                                        associated with the next record.
+
+    std::string d_sourceFile;           holds the name of the source file
+                                        associated with the next record.
+
+    std::string d_symbol;
+
+    size_t d_currentIdx;
+
+    XrefVector d_xrefData;              vector of XrefData records
+
+    std::unordered_map<std::string,     map associating names of entities 
+            XrefData &> d_symbolMap;    with their locations in d_xrefData
+
+
+Store organizes the received information, storing it in an d_symbolMap,
+connecting symbol names (from ABS lines) to XrefData objects in d_xrefData:
+
+        d_symbolMap                  d_xrefData
+        -------------                --------------------
+        name    XrefData & --------------> { XrefData record }
+
+
+Functionality:
+
+    Objdump records start with a line showing the object file name, followed
+by an ABS-line, followed by F-lines, followed by UND-lines. This ordering is
+assumed by Store's function:
+
+Top lines, handled by setObjfile(): 
+    setObjfile() assigns the obj. file name to d_objFile. 
+
+ABS lines, handled by setSource():
+    setSource() assigns the source file name to d_sourceFile.
+
+ 
+g-F lines, handled by setFunction():
+    setFunction() assigns the function name to d_symbol, and defines its
+    XrefData record by calling define(). 
+
+    In define, if the entity is already known, but not yet complete (which
+    happens when the entity was previously encountered in an UND line), then
+    complete it by setting the record's source- and object file names.
+
+
+g-O lines, handled by setObject():
+    setObject() assigns the object name to d_symbol, and defines its
+    XrefData record by calling define()
+
+UND lines, handled by undefined():
+
+    undefined() locates the symbol in d_symbolMap. If not found, it is
+    inserted in d_xrefData and d_symbolMap, w/o source- and object file names,
+    as these are not available for UND entries.
+
+    Also, the currently process objdump function record (whose d_xrefData
+    index is in d_functionIdx calls/uses the UND item, and that index is
+    stored in the UND-entity's 'd_calledFrom' vector
+
+
+Store's insertion operator inserts to cross-reference data into the output stream
+ 
+
+
+
+
+
+
+
+

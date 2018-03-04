@@ -13,14 +13,16 @@ class Storage
     friend std::ostream &operator<<(std::ostream &out, 
                                     Storage const &storage);
 
+    std::vector<std::pair<std::string, std::string>> d_simplify;
+    std::string (Storage::*d_simplifyPtr) (std::string const &symbol);
+    Store d_store;
+
     static FBB::Pattern s_reject;
     static FBB::Pattern s_objFile;
     static FBB::Pattern s_abs;
     static FBB::Pattern s_UND;
     static FBB::Pattern s_g_F;
     static FBB::Pattern s_g_O;
-
-    Store d_store;
 
     public:
         typedef std::string value_type;
@@ -37,6 +39,9 @@ class Storage
         void sourceFile(std::string const &fname);
         void undefined(std::string const &symbol);
         void object(std::string const &symbol);
+
+        std::string simplify(std::string const &symbol);
+        std::string dontSimplify(std::string const &symbol);
 
 };
 

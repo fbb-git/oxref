@@ -2,47 +2,23 @@
 
 void Store::define(std::string const &symbol, bool isFunction)
 {
-    auto iter = find_if(
-                    d_xrefData.begin(), d_xrefData.end(),
-                    [&](XrefData const &data)
-                    {
-                        return data.isDefined(symbol);
-                    }
-                );
+    auto iter = d_symbolMap.find(symbol);
 
-    if (iter != d_xrefData.end())
-        return;                         // symbol already defined
+    if (iter != d_symbolMap.end() and xrefData(iter).complete())
+        return;                             // record already available
 
-    iter = find_if(
-                d_xrefData.begin(), d_xrefData.end(),
-                [&](XrefData const &xrefData)
-                {
-                    return xrefData.hasSymbol(symbol);
-                }
-            );
 
-    size_t currentIdx;
-
-    if (iter != d_xrefData.end())
+    if (iter == d_symbolMap.end())          // completely new record
     {
-        currentIdx = iter - d_xrefData.begin();
-        d_xrefData[currentIdx].setLocation(d_sourceFile, d_objFile);
-        d_defIdx.push_back(currentIdx);
-    }
-    else
-    {
-
-                            // new symbol: defined at index currentIdx, 
-                            // any *UND* elements are for function currentIdx
-                            // if not a function, then d_currentIdx isn't 
-                            // used with *UND* elements
-        d_defIdx.push_back(currentIdx = d_xrefData.size());
+        iter = d_symbolMap.insert( {symbol, d_xrefData.size() } ).first;
 
         d_xrefData.push_back(
-                XrefData(d_sourceFile, d_objFile, isFunction, symbol)
+            new XrefData{ d_sourceFile, d_objFile, isFunction, symbol }
         );
     }
+    else                                        // complete it by specifying
+        xrefData(iter).setLocation(d_sourceFile, d_objFile);  // file names
 
     if (isFunction)
-        d_currentIdx = currentIdx;
+        d_functionIdx = iter->second;
 }

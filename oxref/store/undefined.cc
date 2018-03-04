@@ -11,28 +11,16 @@ void Store::undefined(std::string const &symbol)
     // The function currently handled has a currentIdx and from that index
     // the current *UND* symbol is called.
                 
-    auto iter = find_if(
-                    d_xrefData.begin(), d_xrefData.end(),
-                    [&](XrefData const &xrefData)
-                    {
-                        return xrefData.hasSymbol(symbol);
-                    }
-                );
-
-    size_t index = iter - d_xrefData.begin();   // index of this symbol
-
-    if (iter == d_xrefData.end())               // symbol not yet defined
+    auto iter = d_symbolMap.find(symbol);
+    
+    if (iter == d_symbolMap.end())          // new entity: add to d_xrefData
     {
-        index = d_xrefData.size();
-        d_xrefData.push_back(XrefData{ symbol });   // define the symbol
+        iter = d_symbolMap.insert( { symbol, d_xrefData.size() } ).first;
+                                            // define the symbol, add it to
+                                            // symbolMap and update iter
+        d_xrefData.push_back(new XrefData{ symbol });   
+
     }
 
-    d_xrefData[index].calledFrom(d_currentIdx);
+    xrefData(iter).calledFrom(d_functionIdx);
 }
-
-
-
-
-
-
-

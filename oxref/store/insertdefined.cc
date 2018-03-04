@@ -1,15 +1,17 @@
 #include "store.ih"
 
-void Store::insertDefined(size_t idx, ostream &out, XrefVector const &xref)
+void Store::insertDefined(ostream &out, XrefData const *ref, 
+                                        XrefVector const &xref)
 {
-    XrefData const &ref = xref[idx];
+    if (not ref->complete())
+        return;
 
-    auto begin = ref.usedBy().begin();
-    auto end = ref.usedBy().end();
+    auto begin = ref->usedBy().begin();
+    auto end = ref->usedBy().end();
 
     if (begin != end)
     {
-        ref.defined(out);
+        ref->defined(out);
         out << "  Used By:\n";
         for (auto idx: ranger(begin, end))
             usedBy(idx, out, xref);

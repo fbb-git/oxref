@@ -23,7 +23,12 @@ Pattern Storage::s_g_F(
             "^[[:alnum:]]+\\s+g\\s+F\\s+\\S+\\s+[[:alnum:]]+\\s(.*)");
 
     // 00000000 g     O .data  00000008 Icmbuild::version
+    // 00000000 g     O .bss   00000040 g_nic
 Pattern Storage::s_g_O(
             "^[[:alnum:]]+\\s+g\\s+O\\s+\\S+\\s+[[:alnum:]]+\\s(.*)");
+
+
+
+
 
 

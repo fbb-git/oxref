@@ -17,46 +17,67 @@ class Store
 {
     friend std::ostream &operator<<(std::ostream &out, Store const &store);
 
-    size_t d_currentIdx;
-    std::string d_sourceFile;
     std::string d_objFile;
-    std::string d_symbol;
 
-    typedef std::vector<XrefData> XrefVector;
+    std::string d_sourceFile;
+
+    std::string d_symbol;
+    size_t d_functionIdx;                   // index in d_xrefData holding
+                                            // the current function record:
+                                            // UND entities are called from
+                                            // this function.
+
+    typedef std::vector<XrefData *> XrefVector;
+    typedef XrefVector::const_iterator const_iterator;
 
     XrefVector d_xrefData;
-    mutable std::vector<size_t> d_defIdx;       // indices of defined 
-                                                // functions/objects
+                                            // entity name to d_defIdx index 
+    typedef std::unordered_map<std::string, size_t> SymbolMap;
+    typedef SymbolMap::iterator MapIterator;
 
-//                                            // index in d_xrefData where
-//                                            // a symbol is stored
-//    std::unordered_map<std::string, size_t> d_symbolMap;
+    SymbolMap d_symbolMap;
+    
 
     public:
         Store();
+        ~Store();
 
         void setSource(std::string const &fname);
         void setObjfile(std::string const &fname);
 
         void setFunction(std::string const &function);
         void setObject(std::string const &object);
+
         void undefined(std::string const &symbol);
 
     private:
         void define(std::string const &symbol, bool isFunction);
-        std::ostream &insertInto(std::ostream &out) const;
-        void insert(std::ostream &out, std::string const &name, 
-                                                        bool doSelect) const;
 
-        static void insertDefined(size_t idx, std::ostream &out, 
+        std::ostream &insertInto(std::ostream &out);
+
+        std::ostream &insertSelect(std::ostream &out, 
+                                   std::string const &name) const;
+        std::ostream &insertPattern(std::ostream &out, 
+                                   std::string const &name) const;
+
+        XrefData &xrefData(MapIterator const &iter);
+
+        static void insertDefined(std::ostream &out, 
+                                  XrefData const *ref, 
                                   XrefVector const &xref);
+
         static void usedBy(size_t idx, std::ostream &out, 
                                   XrefVector const &xref);
 };
 
+inline  XrefData &Store::xrefData(MapIterator const &iter)
+{
+    return *d_xrefData[iter->second];
+}
+
 inline std::ostream &operator<<(std::ostream &out, Store const &store)
 {
-    return store.insertInto(out);   
+    return const_cast<Store &>(store).insertInto(out);   
 }
         
 #endif

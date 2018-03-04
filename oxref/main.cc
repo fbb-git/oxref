@@ -12,6 +12,7 @@ namespace
         {"full-symbol",         'f'},
         {"select-pattern",      Arg::Required},
         {"select",              Arg::Required},
+        {"simplify",            Arg::Required},
         {"xref-source-files",   'x'},
         {"version",             'v'},
     };
