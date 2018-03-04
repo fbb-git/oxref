@@ -23,4 +23,5 @@ void Store::undefined(std::string const &symbol)
     }
 
     xrefData(iter).calledFrom(d_functionIdx);
+    d_xrefData[d_functionIdx]->calls(iter->second);
 }

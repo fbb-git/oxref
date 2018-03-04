@@ -30,6 +30,9 @@ class XrefData
                                         // vector of entities that call the
                                         // current entity
 
+    std::vector<size_t> d_calls;        // indices in d_xrefData of entities
+                                        // called by the current entity
+
     bool d_source = false;
     bool d_object = false;
     bool d_fullSymbol;
@@ -49,6 +52,7 @@ class XrefData
         bool hasSymbol(std::string const &symbol) const;
     
         void calledFrom(size_t currentIdx);
+        void calls(size_t idx);
 
         void defined(std::ostream &out) const;
         std::string const &symbol() const;// returns d_cooked
@@ -95,5 +99,6 @@ inline  std::string const &XrefData::symbol() const
 {
     return d_cooked;
 }
+
 
 #endif

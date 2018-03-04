@@ -72,6 +72,11 @@ Using the above example of an objdump record for illustration:
         0000000000000000         *UND*  0000000000000000 Options::instance()
 
     UND lines are processed by undefined(), calling d_store.undefined.
+
+    UND lines also provide info about which entities are called by the current
+    entity. Having defined the UND entity the order-number of the entity is
+    added to the d_called vector, to be used (evnetually) by the calltree facility.
+    See also d_store's function underfined().
  
 *   g-F lines, like
 
@@ -124,6 +129,11 @@ objects. These objects contain the following data members:
     std::vector<size_t> d_calledFrom;   Indices in Store's d_xrefData
                                         vector of entities that call the
                                         current entity
+
+
+    std::vector<size_t> d_calls;        Indices in Store's d_xrefData
+                                        vector of entities that are called by
+                                        the current entity
 
 
     bool d_source;
