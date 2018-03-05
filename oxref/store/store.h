@@ -36,7 +36,11 @@ class Store
     typedef SymbolMap::iterator MapIterator;
 
     SymbolMap d_symbolMap;
+
     bool d_noData;                          // used with calltree()    
+    bool d_dontRepeat;
+    size_t d_lineNr = 0;
+    size_t d_nestLevel = 0;
 
     public:
         Store();
@@ -50,7 +54,7 @@ class Store
 
         void undefined(std::string const &symbol);
 
-        void calltree(size_t idx, size_t nestLevel) const;
+        void calltree(size_t idx);
 
         bool find(size_t *idxPtr, std::string const &startSymbol) const;
 

@@ -1,6 +1,6 @@
 #include "storage.ih"
 
-void Storage::calltree(string const &startSymbol) const
+void Storage::calltree(string const &startSymbol)
 {
     if (size_t idx; not d_store.find(&idx, startSymbol))
         cout << "\n"
@@ -12,6 +12,6 @@ void Storage::calltree(string const &startSymbol) const
                 "CALLTREE for " << startSymbol << "\n"
                 "\n";
 
-        d_store.calltree(idx, 0);
+        d_store.calltree(idx);
     }
 }

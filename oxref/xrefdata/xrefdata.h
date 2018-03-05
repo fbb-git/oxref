@@ -37,6 +37,9 @@ class XrefData
     bool d_object = false;
     bool d_fullSymbol;
 
+    size_t d_lineNr = 0;                // used with call trees (to determine
+                                        // whether an entrie has already been
+                                        // reported)
     public:
 
         XrefData(std::string const &sourceFile,             // 2
@@ -57,12 +60,15 @@ class XrefData
         std::vector<size_t> const &calls() const;
 
         void defined(std::ostream &out) const;
-        std::string const &symbol() const;// returns d_cooked
-        char const *name() const;         // returns d_cooked[d_nameIndex] 
+        std::string const &symbol() const;  // returns d_cooked
+        char const *name() const;           // returns d_cooked[d_nameIndex] 
 
         std::string const &sourceFile() const;
 
         std::vector<size_t> const &usedBy() const;
+
+        void lineNr(size_t nr);             // sets d_lineNr
+        size_t lineNr() const;              // returns it.
 
     private:
         void init();
@@ -76,6 +82,16 @@ class XrefData
         size_t eraseParam(size_t begin);    // returns , or ) position
         size_t eraseParam(size_t begin, size_t len);
 };
+
+inline size_t XrefData::lineNr() const
+{
+    return d_lineNr;
+}
+
+inline void XrefData::lineNr(size_t lineNr) 
+{
+    d_lineNr = lineNr;
+}
 
 inline std::vector<size_t> const &XrefData::calls() const
 {

@@ -13,6 +13,9 @@ oxref (2.00.00)
 
   * Added option --no-xref suppressing the cross-reference listing
 
+  * Added option --dont-repeat suppressing repeated listings of called
+        entities in call-trees
+
 WIP
 
 

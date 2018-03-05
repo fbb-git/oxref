@@ -33,7 +33,7 @@ class Storage
                                     // using the functions below
         void push_back(std::string const &line);
 
-        void calltree(std::string const &startSymbol) const;
+        void calltree(std::string const &startSymbol);
 
     private:
         void function(std::string const &symbol);    
