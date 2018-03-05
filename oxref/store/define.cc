@@ -8,7 +8,10 @@ void Store::define(std::string const &symbol, bool isFunction)
         return;                             // record already available
 
 
-    if (iter == d_symbolMap.end())          // completely new record
+    if (iter != d_symbolMap.end())              // complete it by specifying
+        xrefData(iter).setOrigin(d_sourceFile,  // remaining details
+                                 d_objFile, isFunction);
+    else                                        // or a completely new record
     {
         iter = d_symbolMap.insert( {symbol, d_xrefData.size() } ).first;
 
@@ -16,8 +19,6 @@ void Store::define(std::string const &symbol, bool isFunction)
             new XrefData{ d_sourceFile, d_objFile, isFunction, symbol }
         );
     }
-    else                                        // complete it by specifying
-        xrefData(iter).setLocation(d_sourceFile, d_objFile);  // file names
 
     if (isFunction)
         d_functionIdx = iter->second;

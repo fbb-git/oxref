@@ -11,9 +11,15 @@ Where:
               count - display function argument counts only
               first - only display the first word of the parameter types
               <len> - restrict parameter types to the first <len> characters
+      --calltree startsymbol  - write the call-tree to stdout
+      --dont-repeat           - don't repeat sections in call-trees, but
+                                mark the top-entries of repeated sections
       --full-symbol (-f)      - display the full symbol names (e.g.,
                                 including class name prefixes)
       --help (-h)             - provide this help
+      --no-data               - do not report data in call-trees
+      --no-xref               - do not write the cross-reference listing to
+                                stdout
       --object-files (-o)     - display the object file names
       --select name           - only display the cross-reference of `name',
                                 where `name' is the (initial substring of an)

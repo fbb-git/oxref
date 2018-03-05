@@ -5,11 +5,15 @@ namespace
     Arg::LongOption longOptions[] =
     {
         {"arg",                 'a'},
+        {"calltree",            Arg::Required},
+        {"dont-repeat",         Arg::None},
         {"help",                'h'},
         {"objdump",             Arg::Required},
         {"object-files",        'o'},
         {"source-files",        's'},
         {"full-symbol",         'f'},
+        {"no-data",             Arg::None},
+        {"no-xref",             Arg::None},
         {"select-pattern",      Arg::Required},
         {"select",              Arg::Required},
         {"simplify",            Arg::Required},
@@ -41,15 +45,25 @@ try
         arg.basename() << " V" << Icmbuild::version << ' ' << 
                                                     Icmbuild::years << "\n"
         "\n"
-        "CREATED " << DateTime().rfc2822() << "\n"
-        "CROSS REFERENCE FOR: ";
+        "CREATED " << DateTime().rfc2822() << "\n";
 
-    copy(argv + 1, argv + argc, ostream_iterator<char const *>(cout, " "));
+    if (not arg.option(0, "no-xref"))
+    {
+        cout << "CROSS REFERENCE FOR: ";
 
-    cout << '\n' <<
-        setfill('-') << setw(70) << '-' << setfill(' ') << "\n"
-        "\n" <<
-        storage << '\n';
+        copy(argv + 1, argv + argc, 
+             ostream_iterator<char const *>(cout, " "));
+
+        cout << '\n' <<
+            setfill('-') << setw(70) << '-' << setfill(' ') << "\n"
+            "\n" <<
+            storage << '\n';
+    }
+
+    string startSymbol;
+    if (arg.option(&startSymbol, "calltree"))
+        storage.calltree(startSymbol);
+
 }
 catch (std::exception const &e)
 {

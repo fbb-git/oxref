@@ -33,6 +33,8 @@ class Storage
                                     // using the functions below
         void push_back(std::string const &line);
 
+        void calltree(std::string const &startSymbol) const;
+
     private:
         void function(std::string const &symbol);    
         void objFile(std::string const &fname);

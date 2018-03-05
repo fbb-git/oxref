@@ -44,15 +44,17 @@ class XrefData
                  bool isFunction, std::string const &symbol);
         XrefData(std::string const &symbol);                // 3
 
-        void setLocation(std::string const &sourceFile, 
-                 std::string const &objFile);
+        void setOrigin(std::string const &sourceFile, 
+                 std::string const &objFile, bool isFunction);
 
         bool complete() const;
-
+        bool isFunction() const;
         bool hasSymbol(std::string const &symbol) const;
     
         void calledFrom(size_t currentIdx);
+
         void calls(size_t idx);
+        std::vector<size_t> const &calls() const;
 
         void defined(std::ostream &out) const;
         std::string const &symbol() const;// returns d_cooked
@@ -75,9 +77,19 @@ class XrefData
         size_t eraseParam(size_t begin, size_t len);
 };
 
+inline std::vector<size_t> const &XrefData::calls() const
+{
+    return d_calls;
+}
+
 inline bool XrefData::complete() const
 {
     return not d_sourceFile.empty();
+}
+
+inline bool XrefData::isFunction() const
+{
+    return d_isFunction;
 }
 
 inline std::vector<size_t> const &XrefData::usedBy() const

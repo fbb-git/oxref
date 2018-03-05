@@ -7,6 +7,12 @@ oxref (2.00.00)
   * Added option --simplify to use a file containing simplified type
     definitions. 
 
+  * Added option --calltree to generate a function/data call-tree.
+
+  * Added option --no-data suppressing data entities in call-trees.
+
+  * Added option --no-xref suppressing the cross-reference listing
+
 WIP
 
 
