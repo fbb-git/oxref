@@ -39,6 +39,8 @@ try
                             // insert into Storage
     copy(odump.begin(), odump.end(), back_inserter(storage));
 
+    storage.fineTune();
+
                             // display the results
     cout << 
         arg.basename() << " by " << Icmbuild::author << '\n' <<

@@ -1,0 +1,156 @@
+find all files containing marker-comment. E.g.,
+
+    grep -l '//.:' */*.cc
+
+//c: entries specify calls of virtual or overridden function from 
+preceding //f: (function definition) entries. 
+
+Due to the complexity of the way functions may be declared and/or defined 
+entries must be identical to the entries used by objdump: when in doubt run
+oxref once to obtain the declarations from the cross-reference listing.
+Here is an example:
+
+    //f: Producer::process(Producer*, Storage&)
+    void Producer::process(Producer *producer, Storage &storage)
+
+Grep may show, e.g.,
+
+    natfork/run.cc
+
+Overridden functions will not be reported as being called from destructors,
+but from the functions defined before the //c: entries.
+
+E.g., oxref produces for NatFork::childProcess:
+
+    childProcess()
+      Full name: NatFork::childProcess()
+      Source:    childprocess.cc (22childprocess.o)
+      Used By:
+        destructor.cc: NatFork::~NatFork()
+
+This becomes:
+
+    childProcess()
+      Full name: NatFork::childProcess()
+      Source:    childprocess.cc (22childprocess.o)
+      Used By:
+        run.cc: NatFork::run()
+
+
+Objects or functions defined via static arrays in data files (e.g.,
+natfork/data.cc) may be dynamically defined and used via a (base class?)
+pointer. In such files //c: entries are used to indicate the used objects or
+functions. An entry like
+
+    DevicesProducer(std::ostream&, Storage&)
+      Full name: DevicesProducer::DevicesProducer(std::ostream&, Storage&)
+      Source:    devicesproducer1.cc (19devicesproducer1.o)
+      Used By:
+        data.cc: GLOBALS data.cc 22data.o
+
+thus may become:
+
+    DevicesProducer(std::ostream&, Storage&)
+      Full name: DevicesProducer::DevicesProducer(std::ostream&, Storage&)
+      Source:    devicesproducer1.cc (19devicesproducer1.o)
+      Used By:
+        data.cc: GLOBALS data.cc 22data.o
+        childprocess::cc NatFork::childProcess()
+
+Base class virtual function calls may actually be overridden function calls of
+derived classes. The base class function may also be pure virtual. E.g.,in
+
+    void Producer::process(Producer *producer, Storage &storage)
+    {
+        producer->run();
+        storage.setEmpty();
+    }
+
+the function run() is called which is a pure virtual function. Such functions
+do not appear in oxref's overview. Their calls may be specified using //p: or
+using the common //c: marker (when not pure virtual). 
+
+Classes overriding these (pure) virtual functions may specify so by using
+
+    //c: 
+
+merely followed by the name of the base class. E.g.,
+
+    //f: 
+    void DevicesProducer::run()
+    {
+        //c: Producer
+        ...
+    }
+
+In these cases the function is not reported as being called by a
+destructor, but the locations are listed from where the base class function is
+called.
+
+    E.g., instead of
+
+    run()
+      Full name: DevicesProducer::run()
+      Source:    run.cc (19run.o)
+      Used By:
+        destructor.cc: DevicesProducer::~DevicesProducer()
+
+the following is used:
+
+    run()
+      Full name: DevicesProducer::run()
+      Source:    run.cc (19run.o)
+      Used By:
+        producer.cc: Producer::process(Producer*, Storage&)
+
+If a function is explicitly called from a destructor, it must be specified at
+the destructor. E.g., if Producer::~Producer explcitly calls
+DevicesProducer::run() then use
+
+    //f:
+    Producer::~Producer()
+    {
+        //c: DevicesProducer::run()
+
+        // (explicitly calls DevicesProducer::run in its body)
+    }
+    
+----------------------------------------------------------------------------
+Work flow:
+
+    When defining a function calling some virtual function/pointing to a
+    derived class object or overriding a base class function specify  f:
+
+    In addition specify //c: near the location of the call or somewhere in the
+    function's body if it overrides a base-class function
+
+--------------------------------------------------------------------------
+Summary:
+    
+    No requirements unless virtual functions are used.
+
+    //f:            - followed by the function header for functions 
+                        * calling virtual or overridden functions 
+                        * using derived class objects via pointers / refs.
+                          to base their classes
+
+    //c:            - followed by 
+                        * the class::function header of called virtual
+                          or overridden functions (including use of derived
+                          class objects via pointers/refs to base classes)
+                        * the name of the base class whose virtual function
+                          is overriden by de current function
+
+----------------------------------------------------------------------------
+
+
+
+
+                      
+
+
+
+
+
+
+

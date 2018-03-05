@@ -33,6 +33,9 @@ class Storage
                                     // using the functions below
         void push_back(std::string const &line);
 
+        void fineTune();            // fine-tune the xref using //f and //c
+                                    // specifications
+
         void calltree(std::string const &startSymbol);
 
     private:
@@ -45,6 +48,8 @@ class Storage
         std::string simplify(std::string const &symbol);
         std::string dontSimplify(std::string const &symbol);
 
+        void fineTuneCall(size_t caller, bool isDestructor,
+                          std::string declaration);
 };
 
 inline std::ostream &operator<<(std::ostream &out, Storage const &storage)

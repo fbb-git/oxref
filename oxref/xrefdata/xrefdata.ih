@@ -1,6 +1,7 @@
 #include "xrefdata.h"
 
 #include <iostream>
+#include <algorithm>
 
 #include <bobcat/arg>
 #include <bobcat/exception>

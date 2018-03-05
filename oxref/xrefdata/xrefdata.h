@@ -26,12 +26,18 @@ class XrefData
 
     bool d_isFunction = false;          // true: function, false: object
 
+    typedef std::vector<size_t>::iterator iterator;
+
     std::vector<size_t> d_calledFrom;   // Indices in Store's d_xrefData
                                         // vector of entities that call the
                                         // current entity
 
     std::vector<size_t> d_calls;        // indices in d_xrefData of entities
                                         // called by the current entity
+
+    bool d_keepDestrCall = false;       // if true then this entity is
+                                        // explicitly called by the destructor
+                                        // using a //c call
 
     bool d_source = false;
     bool d_object = false;
@@ -55,9 +61,12 @@ class XrefData
         bool hasSymbol(std::string const &symbol) const;
     
         void calledFrom(size_t currentIdx);
+        std::vector<size_t> &calledFrom();
+        void rmFrom(iterator iter);
 
         void calls(size_t idx);
         std::vector<size_t> const &calls() const;
+        void rmCall(size_t idx);
 
         void defined(std::ostream &out) const;
         std::string const &symbol() const;  // returns d_cooked
@@ -69,6 +78,9 @@ class XrefData
 
         void lineNr(size_t nr);             // sets d_lineNr
         size_t lineNr() const;              // returns it.
+
+        bool keepDestrCall() const;
+        void setKeepDestrCall();
 
     private:
         void init();
@@ -83,6 +95,21 @@ class XrefData
         size_t eraseParam(size_t begin, size_t len);
 };
 
+inline void XrefData::rmFrom(iterator iter)
+{
+    d_calledFrom.erase(iter);
+}
+
+inline bool XrefData::keepDestrCall() const
+{
+    return d_keepDestrCall;
+}
+
+inline void XrefData::setKeepDestrCall()
+{
+    d_keepDestrCall = true;
+}
+
 inline size_t XrefData::lineNr() const
 {
     return d_lineNr;
@@ -96,6 +123,11 @@ inline void XrefData::lineNr(size_t lineNr)
 inline std::vector<size_t> const &XrefData::calls() const
 {
     return d_calls;
+}
+
+inline std::vector<size_t> &XrefData::calledFrom() 
+{
+    return d_calledFrom;
 }
 
 inline bool XrefData::complete() const

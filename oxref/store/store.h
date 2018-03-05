@@ -58,6 +58,14 @@ class Store
 
         bool find(size_t *idxPtr, std::string const &startSymbol) const;
 
+        size_t find(std::string const &declaration);    // 2, ~0UL: not found
+
+        void rmDestructorCall(size_t idx);              // idx must be valid
+
+        bool isDestructor(size_t funIdx) const;
+
+        void fromToCall(size_t calleR, bool destructor, size_t callEE);
+
     private:
         void define(std::string const &symbol, bool isFunction);
 
@@ -86,6 +94,11 @@ inline  XrefData &Store::xrefData(MapIterator const &iter)
 inline std::ostream &operator<<(std::ostream &out, Store const &store)
 {
     return const_cast<Store &>(store).insertInto(out);   
+}
+
+inline bool Store::isDestructor(size_t funIdx) const 
+{
+    return d_xrefData[funIdx]->symbol().find("::~") != std::string::npos;    
 }
         
 #endif
