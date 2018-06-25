@@ -1,27 +1,8 @@
 Oxref generates a cross reference listing of symbols defined in non-stripped
 object files and/or libraries.
 
-A cross reference listing shows the functions using certain symbols
-(functions, data).  This is useful information during program develop- ment
-and debugging phases.  E.g., assuming that the signature; the pre-conditions
-or the post-conditions of a function must be changed it is important to know
-from what function(s) the function-to-modify is called to verify that the
-changes to the modified function do not break its calling functions.
 
-The generated cross reference listing starts with a header showing information
-about the program, a time stamp and the arguments passed to oxref. E.g.,
+Oxref's repository has moved to https://https://gitlab.com/fbb-git/oxref
+and is not maintained at this location anymore.
 
-
-To create the program from its sources, either descend into the oxref
-directory, or unpack a created archive, cd into its top-level directory and
-follow the instructions provided in the INSTALL file found there.
-
-Alternatively, binary ready-to-install versions of oxref are available in
-verious Linux distributions, in particular Debian. See, e.g.,
-https://packages.debian.org/search?keywords=oxref&searchon=names&suite=all&section=all
-
-Github's web-pages for oxref are here:
-https://fbb-git.github.io/oxref/
-
-
-
+The project's web-page can be found at http://fbb-git.gitlab.io/oxref/
